@@ -1,0 +1,60 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">ABC Saloon</h1>
+        <button class="button icon ion-camera no-border" ng-click="showCamera()"></button>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="addForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-list>
+                <ion-item class="item">
+                    <button class="button button-small">
+                        1
+                    </button>
+                    <button class="button button-small">
+                        1.5
+                    </button>
+                    <button class="button button-small">
+                        2
+                    </button>
+                    <button class="button button-small">
+                        2.5
+                    </button>
+                    <button class="button button-small">
+                        3
+                    </button>
+                    <button class="button button-small">
+                        3.5
+                    </button>
+                    <button class="button button-small">
+                        4
+                    </button>
+                    <button class="button button-small">
+                        4.5
+                    </button>
+                    <button class="button button-small">
+                        5
+                    </button>
+                </ion-item>
+            </ion-list>
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.message.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.message.$valid && addForm.$submitted}">
+                <ion-label >Write your review</ion-label>
+                <textarea name="message" ng-model="data.message" rows="5" required></textarea>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.message.$error && addForm.$submitted" 
+                 ng-messages="addForm.message.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter your review
+                </div>
+            </div>
+            
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Save" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+    </ion-content>
+</ion-view>

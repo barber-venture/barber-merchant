@@ -1,0 +1,18 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Feeds</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <ion-tabs class="tabs-icon-top">
+            <!-- Dashboard Tab -->
+            <ion-tab title="Feeds" icon="icon ion-clipboard" class="tabItem">
+                <div ng-include src="'templates/my-feeds.html'"></div>
+            </ion-tab>
+            <!-- Friends Tab -->
+            <ion-tab title="Community" icon="icon ion-person-stalker"  class="tabItem">
+                <div ng-include src="'templates/my-community.html'"></div>
+            </ion-tab>
+        </ion-tabs>
+    </ion-content>
+</ion-view>

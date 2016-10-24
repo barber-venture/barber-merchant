@@ -65,11 +65,12 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                 url: '/feeds',
                 views: {
                     'dashboard-feeds': {
-                        templateUrl: 'templates/tab-feeds.html',
-                        controller: 'FeedsController'
+                        templateUrl: 'templates/feeds.html',
+                        controller: 'MyFeedsController'
                     }
                 }
             })
+            
 
             $stateProvider.state('dashboard.account', {
                 url: '/account',
@@ -150,23 +151,32 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                 controller: 'ReviewsController'
             });
 
+            $stateProvider.state('add-review', {
+                url: '/add-review',
+                templateUrl: 'templates/add-review.html',
+                controller: 'AddReviewController'
+            });
+
+            $stateProvider.state('book-slot', {
+                url: '/book-slot',
+                templateUrl: 'templates/book-slot.html',
+                controller: 'BookSlotController'
+            });
+
+
             $urlRouterProvider.otherwise('/')
         })
 
-        
-        .controller('AppCtrl', function ($state, $scope, $ionicHistory, $ionicSideMenuDelegate, $ionicPopup, $ionicPlatform) {
+        .controller('AppCtrl', function ($state, $scope, $ionicHistory, $ionicSideMenuDelegate, $ionicPopup) {
             ionic.Platform.ready(function () {
-                // then override any default you want
-                window.plugins.nativepagetransitions.globalOptions.duration = 500;
+                /*window.plugins.nativepagetransitions.globalOptions.duration = 500;
                 window.plugins.nativepagetransitions.globalOptions.iosdelay = 350;
                 window.plugins.nativepagetransitions.globalOptions.androiddelay = 350;
                 window.plugins.nativepagetransitions.globalOptions.winphonedelay = 350;
                 window.plugins.nativepagetransitions.globalOptions.slowdownfactor = 4;
                 // these are used for slide left/right only currently
                 window.plugins.nativepagetransitions.globalOptions.fixedPixelsTop = 0;
-                window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 0;
-
-
+                window.plugins.nativepagetransitions.globalOptions.fixedPixelsBottom = 0;*/
             });
 
 
@@ -177,7 +187,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
 
             $scope.myGoBack = function () {
                 $ionicHistory.goBack();
-                window.plugins.nativepagetransitions.slide(
+                /*window.plugins.nativepagetransitions.slide(
                         {"direction": "right"},
                         function (msg) {
                             //alert("success: " + msg)
@@ -185,12 +195,12 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                         function (msg) {
                             //alert("error: " + msg)
                         } // called in case you pass in weird values
-                );
+                );*/
             };
 
             $scope.goToPage = function (pageId) {
                 $state.go(pageId);
-                window.plugins.nativepagetransitions.slide(
+                /*window.plugins.nativepagetransitions.slide(
                         {"direction": "left"},
                         function (msg) {
                             //alert("success: " + msg)
@@ -198,7 +208,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                         function (msg) {
                             //alert("error: " + msg)
                         } // called in case you pass in weird values
-                );
+                );*/
             };
 
 
@@ -235,7 +245,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
         })
 
         .controller('LogoutController', function ($scope, $state) {
-            $scope.goToPage('home');
+            $state.go('home');
         })
 
         .controller('SignUpController', function ($scope, $state) {
@@ -332,6 +342,22 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
         })
 
         .controller('ReviewsController', function ($scope, $state) {
+
+        })
+
+        .controller('AddReviewController', function ($scope, $state) {
+
+        })
+
+        .controller('BookSlotController', function ($scope, $state) {
+
+        })
+
+        .controller('MyFeedsController', function ($scope, $state) {
+
+        })
+
+        .controller('MyCommunityController', function ($scope, $state) {
 
         })
 

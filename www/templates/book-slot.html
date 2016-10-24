@@ -1,0 +1,60 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Book Slot</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="addForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.date.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.date.$valid && addForm.$submitted}">
+                <ion-label >Select Date</ion-label>
+                <input class="float-left width-78" type="date" name="date" ng-model="data.date" required />
+                <i class="icon ion-calendar size-25 float-right margin-right-2"></i>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.date.$error && addForm.$submitted" 
+                 ng-messages="addForm.date.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please select date
+                </div>
+            </div>
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.time.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.time.$valid && addForm.$submitted}">
+                <ion-label >Select Time</ion-label>
+                <input class="float-left width-78" type="time" name="time" ng-model="data.time" required />
+                <i class="icon ion-clock size-25 float-right margin-right-2"></i>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.time.$error && addForm.$submitted" 
+                 ng-messages="addForm.time.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please select time
+                </div>
+            </div>
+            
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.message.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.message.$valid && addForm.$submitted}">
+                <ion-label >Other Information</ion-label>
+                <textarea name="message" ng-model="data.message" rows="5" required></textarea>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.message.$error && addForm.$submitted" 
+                 ng-messages="addForm.message.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter message
+                </div>
+            </div>
+            
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Book" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+    </ion-content>
+</ion-view>
