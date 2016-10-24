@@ -1,0 +1,72 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">John Abrahim</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="addForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-list>
+                <ion-item class="item">
+                    <div class="item-avatar">
+                        <img src="img/profile.jpg" class="avtar-custom" />
+                    </div>
+                    <button class="button icon ion-edit top-corner" ng-click="showCamera()"></button>
+                </ion-item>
+            </ion-list>
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.name.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.name.$valid && addForm.$submitted}">
+                <ion-label >Parlor Name</ion-label>
+                <input type="text" name="name" ng-model="data.name" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.name.$error && addForm.$submitted" 
+                 ng-messages="addForm.name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter name
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.contact.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.contact.$valid && addForm.$submitted}">
+                <ion-label class="float-left width-90">Contact</ion-label>
+                <input type="tel" name="contact" ng-model="data.contact" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.contact.$error && addForm.$submitted" 
+                 ng-messages="addForm.contact.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter contact number
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.location.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.location.$valid && addForm.$submitted}">
+                <ion-label class="float-left width-90">Location</ion-label>
+                <input type="text" name="location" ng-model="data.location" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.location.$error && addForm.$submitted" 
+                 ng-messages="addForm.location.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter your location
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" >
+                <ion-label>Summary</ion-label>
+                <textarea name="summary" ng-model="data.summary" required></textarea>
+            </ion-input>
+
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Save" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+    </ion-content>
+</ion-view>

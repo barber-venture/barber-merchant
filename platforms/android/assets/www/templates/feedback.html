@@ -1,0 +1,35 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Feedback</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="changeForm" ng-submit="submitForm(changeForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : changeForm.feedback.$invalid && changeForm.$submitted, 
+        'no-errors' : changeForm.feedback.$valid && changeForm.$submitted}">
+                <ion-label >Feedback</ion-label>
+                <textarea type="password" name="feedback" placeholder="Feedback" ng-model="data.feedback" required></textarea>
+            </ion-input>
+
+            <div class="error-container" ng-show="changeForm.feedback.$error && changeForm.$submitted" 
+                 ng-messages="changeForm.feedback.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter feedback
+                </div>
+            </div>
+            
+            
+            
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Submit" 
+                       ng-disabled="changeForm.$invalid && changeForm.$submitted">
+            </ion-input>
+        </form>
+
+
+
+    </ion-content>
+
+</ion-view>

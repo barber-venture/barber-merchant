@@ -1,0 +1,72 @@
+<ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Sign Up</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="signupForm" ng-submit="submitForm(signupForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : signupForm.email.$invalid && signupForm.$submitted, 
+        'no-errors' : signupForm.email.$valid && signupForm.$submitted}">
+                <ion-label >Email</ion-label>
+                <input type="email" name="email" placeholder="Email" ng-model="data.email" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="signupForm.email.$error && signupForm.$submitted" 
+                 ng-messages="signupForm.email.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter email address
+                </div>
+                <div class="error" ng-show="signupForm.email.$invalid && !signupForm.email.$pristine">
+                    <i class="ion-information-circled"></i> 
+                    Please enter valid email address
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 
+        'no-errors' : signupForm.password.$valid && signupForm.$submitted}">
+                <ion-label >Password</ion-label>
+                <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="signupForm.password.$error && signupForm.$submitted" 
+                 ng-messages="signupForm.password.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter password
+                </div>
+            </div>
+
+
+
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Sign Up" 
+                       ng-disabled="signupForm.$invalid && signupForm.$submitted">
+            </ion-input>
+        </form>
+
+        <ion-list>
+            <ion-item ng-click="goToPage('login')">
+                Already Registered? Log In
+            </ion-item>
+        </ion-list>
+
+        <div class="row">
+            <div class="col">
+                By creating an account you agree to barbershop's terms of service, privacy policy and content policy
+            </div>
+        </div>
+
+        <ion-footer-bar>
+            <div class="row">
+                <div class="col col-center text-center">
+                    <h4 class="gray">Login With Facebook</h4>
+                </div>
+            </div>
+        </ion-footer-bar>
+
+    </ion-content>
+
+</ion-view>

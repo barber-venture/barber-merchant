@@ -1,0 +1,26 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Settings</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <ion-list>
+            <ion-item item="volunteer" ng-click="goToPage('change-password')" class="item item-icon-right">
+                <i class="icon ion-chevron-right icon-accessory"></i> 
+                Change Password
+            </ion-item>
+            <ion-item item="volunteer" ng-click="goToPage('static-pages')" class="item item-icon-right">
+                <i class="icon ion-chevron-right icon-accessory"></i> 
+                About
+            </ion-item>
+            <ion-item item="volunteer" ng-click="goToPage('feedback')" class="item item-icon-right">
+                <i class="icon ion-chevron-right icon-accessory"></i> 
+                Send Feedback
+            </ion-item>
+            <ion-item item="volunteer" ng-click="goToPage('logout')" class="item item-icon-right">
+                <i class="icon ion-chevron-right icon-accessory"></i> 
+                Logout
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

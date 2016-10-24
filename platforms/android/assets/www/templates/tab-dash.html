@@ -1,0 +1,62 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <div class="location-title" ng-click="openLocation()">
+            No Location
+        </div>
+        <button class="button ioc ion-chevron-down no-border" ng-click="openLocation()"></button>
+        <h1 class="title">&nbsp;</h1>
+        <div class="buttons">
+            <button class="button icon ion-funnel no-border" ng-click="openFilter()"></button>
+            <button class="button icon ion-search no-border" ng-click="dashboardSearch('dashboardSearch')"></button>
+            <button class="button icon ion-android-notifications no-border"></button>
+        </div>
+
+
+    </ion-header-bar>
+    <div id="dashboardSearch" class="bar bar-subheader hide">
+        <label class="item-input textbox-search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="Search">
+        </label>
+    </div>
+    <ion-content overflow-scroll="true" class="padding">
+        <ion-list class="dashboard">
+            <ion-item ng-click="goToPage('saloon-detail')" class="no-border">
+                <span class="badge badge-assertive top-corner">4.5</span>
+                <img src="img/Chrysanthemum.jpg" />
+                <ion-list>
+                    <ion-item class="padding-0">
+                        <div class="item row no-border">
+                            <span class="left-align col col-50">ABC Saloon</span>
+                            <span class="right-align col col-50 size-10">Male</span>
+                        </div>
+                        <div class="item row no-border">
+                            <span class="col size-10">B-12, vidyadhar nagar, jaipur</span>
+                        </div>
+                        <div class="item row no-border">
+                            <div class="ioc ion-location col">&nbsp;&nbsp;2.4 KM</div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+            <ion-item ng-click="goToPage('saloon-detail')" class="no-border">
+                <span class="badge badge-assertive top-corner">4.5</span>
+                <img src="img/Desert.jpg" />
+                <ion-list>
+                    <ion-item class="padding-0">
+                        <div class="item row no-border">
+                            <span class="left-align col col-50">ABC Saloon</span>
+                            <span class="right-align col col-50 size-10">Male</span>
+                        </div>
+                        <div class="item row no-border">
+                            <span class="col size-10">B-12, vidyadhar nagar, jaipur</span>
+                        </div>
+                        <div class="item row no-border">
+                            <div class="ioc ion-location col">&nbsp;&nbsp;2.4 KM</div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
