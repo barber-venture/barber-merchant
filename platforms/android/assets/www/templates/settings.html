@@ -1,6 +1,6 @@
-<ion-view title="Dashboard" cache-view="false">
+<ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
     <ion-header-bar class="bar-positive">
-        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <button menu-toggle = "left" class = "button button-icon icon ion-navicon show"></button>
         <h1 class="title">Settings</h1>
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="padding">
@@ -9,9 +9,9 @@
                 <i class="icon ion-chevron-right icon-accessory"></i> 
                 Change Password
             </ion-item>
-            <ion-item item="volunteer" ng-click="goToPage('static-pages')" class="item item-icon-right">
+            <ion-item item="volunteer" ng-repeat="pages in staticPages" ng-click="goToStaticPage(pages.Page.id)" class="item item-icon-right">
                 <i class="icon ion-chevron-right icon-accessory"></i> 
-                About
+                {{pages.Page.title}}
             </ion-item>
             <ion-item item="volunteer" ng-click="goToPage('feedback')" class="item item-icon-right">
                 <i class="icon ion-chevron-right icon-accessory"></i> 

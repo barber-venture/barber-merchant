@@ -1,19 +1,16 @@
 <ion-view view-title="Tabs" cache-view="false">
     <ion-tabs class="tabs-icon-top">
-        <!-- Dashboard Tab -->
-        <ion-tab title="Home" icon="icon ion-home" ng-click="goToPage('dashboard.dash')" class="tabItem">
-            <ion-nav-view name="dashboard-dash"></ion-nav-view>
+        <ion-tab title="Pending" icon="icon ion-android-radio-button-on" ng-click="goToPage('dashboard.bookings')" class="tabItem">
+            <ion-nav-view name="dashboard-bookings"></ion-nav-view>
         </ion-tab>
-        <!-- Friends Tab -->
-        <ion-tab title="Add" icon="icon ion-plus-circled" ng-click="goToPage('dashboard.add')"  class="tabItem">
-            <ion-nav-view name="dashboard-add"></ion-nav-view>
+        <ion-tab title="Accepted" icon="icon ion-checkmark-circled" ng-click="goToPage('dashboard.accepted')"  class="tabItem">
+            <ion-nav-view name="dashboard-accepted"></ion-nav-view>
         </ion-tab>
-        <!-- Account Tab -->
-        <ion-tab title="Feeds" icon="icon ion-ios-list" ng-click="goToPage('dashboard.feeds')" class="tabItem">
-            <ion-nav-view name="dashboard-feeds"></ion-nav-view>
+        <ion-tab title="On-Going" icon="icon ion-clock" ng-click="goToPage('dashboard.ongoing')" class="tabItem">
+            <ion-nav-view name="dashboard-ongoing"></ion-nav-view>
         </ion-tab>
-        <ion-tab title="Account" icon="icon ion-person" ng-click="goToPage('dashboard.account')" class="tabItem">
-            <ion-nav-view name="dashboard-account"></ion-nav-view>
+        <ion-tab title="Completed" icon="icon ion-checkmark-round" ng-click="goToPage('dashboard.completed')" class="tabItem">
+            <ion-nav-view name="dashboard-completed"></ion-nav-view>
         </ion-tab>
     </ion-tabs>
 </ion-view>

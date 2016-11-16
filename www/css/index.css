@@ -284,3 +284,19 @@ label.item.has-error {
  .margin-right-2{
      margin-right: 2%;
  }
+ 
+ .margin-top-16{
+     margin-top: 16% !important;
+ }
+ 
+ .profile-pics img{
+     width: 18% !important;
+ }
+ 
+ .show{
+     display: block !important;
+ }
+ 
+ /*.slider-slides{
+     width:100% !important;
+ }*/

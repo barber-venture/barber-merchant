@@ -3,7 +3,7 @@
         <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
         <h1 class="title">Sign Up</h1>
     </ion-header-bar>
-    <ion-content overflow-scroll="true" class="padding">
+    <ion-content class="padding">
         <form name="signupForm" ng-submit="submitForm(signupForm)" class="list card no-margin" novalidate="" >
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : signupForm.email.$invalid && signupForm.$submitted, 
@@ -59,13 +59,6 @@
             </div>
         </div>
 
-        <ion-footer-bar>
-            <div class="row">
-                <div class="col col-center text-center">
-                    <h4 class="gray">Login With Facebook</h4>
-                </div>
-            </div>
-        </ion-footer-bar>
 
     </ion-content>
 
