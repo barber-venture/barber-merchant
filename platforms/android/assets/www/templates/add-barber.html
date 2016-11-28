@@ -1,0 +1,65 @@
+<ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Add Account</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <form name="addForm" id="addBarberForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.email.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.email.$valid && addForm.$submitted}">
+                <ion-label >Email</ion-label>
+                <input type="email" name="email" placeholder="Email" ng-model="data.email" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.email.$error && addForm.$submitted" 
+                 ng-messages="addForm.email.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter email address
+                </div>
+                <div class="error" ng-show="addForm.email.$invalid && !addForm.email.$pristine">
+                    <i class="ion-information-circled"></i> 
+                    Please enter valid email address
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.password.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.password.$valid && addForm.$submitted}">
+                <ion-label >Password</ion-label>
+                <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.password.$error && addForm.$submitted" 
+                 ng-messages="addForm.password.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter password
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.name.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.name.$valid && addForm.$submitted}">
+                <ion-label >Full Name</ion-label>
+                <input type="text" name="name" placeholder="Full Name" ng-model="data.name" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.name.$error && addForm.$submitted" 
+                 ng-messages="addForm.name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter barber name
+                </div>
+            </div>
+
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Add" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+
+    </ion-content>
+
+</ion-view>

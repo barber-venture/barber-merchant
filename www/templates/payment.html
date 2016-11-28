@@ -1,0 +1,45 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-positive">
+        <h1 class="title">Create Invoice</h1>
+        <button class="button button-primary no-border" ng-click="closePayment()">Cancel</button>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true">
+        <form name="addForm" id="paymentForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.details.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.details.$valid && addForm.$submitted}">
+                <ion-label >Details of work</ion-label>
+                <textarea name="details" ng-model="data.details" rows="5" required></textarea>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.details.$error && addForm.$submitted" 
+                 ng-messages="addForm.details.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter your work details
+                </div>
+            </div>
+            
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.amount.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.amount.$valid && addForm.$submitted}">
+                <ion-label >Total Amount</ion-label>
+                <input name="amount" type="tel" ng-model="data.amount"  required />
+                <input name="merchant_id" id="merchantId" type="hidden" ng-model="data.merchant_id" />
+                <input name="appointment_id" id="appointmentId" type="hidden" ng-model="data.appointment_id" />
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.amount.$error && addForm.$submitted" 
+                 ng-messages="addForm.amount.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter total amount to be payable
+                </div>
+            </div>
+
+            <ion-input class="item-input padding">
+                <input type="submit" ng-disabled="addForm.$invalid && addForm.$submitted" class="button button-positive" value="Create" />
+            </ion-input>
+        </form>
+    </ion-content>
+</ion-modal-view>

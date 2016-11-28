@@ -7,28 +7,34 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.barber"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.barber"
-        },
         "com.telerik.plugins.nativepagetransitions": {
-            "PACKAGE_NAME": "com.barber"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "com.barbermerchant"
+            "PACKAGE_NAME": "com.fablysh.merchant"
         },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.barbermerchant"
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.barbermerchant"
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.barbermerchant"
+            "PACKAGE_NAME": "com.fablysh.merchant"
         }
     }
 }

@@ -35,7 +35,8 @@ function openGallery(destId) {
 }
 
 function onCameraFail(err) {
-    showAlert("Error:" + JSON.stringify(err), alertDismissed, "Camera", "Ok");
+    alert(JSON.stringify(err))
+    showAlert("Error:" + err, alertDismissed, "Camera", "Ok");
 }
 
 function showAlert(message, alertCallback, title, buttonName) {
@@ -44,5 +45,34 @@ function showAlert(message, alertCallback, title, buttonName) {
 
 function alertDismissed() {
 
+}
+
+function onNotification(e) {
+
+    switch (e.event)
+    {
+        case 'registered':
+            var responsePromise = $.ajax({
+                method: 'POST',
+                url: apiUrl + "registerDevice",
+                data: $.param({
+                    user_id: userInfo.id,
+                    uuid: device.uuid,
+                    registrationid: e.regid,
+                    model: device.model,
+                    platform: device.platform
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+            break;
+        case 'message':
+            alert(JSON.stringify(e.payload))
+            break;
+        case 'error':
+            alert(e.msg);
+            break;
+    }
 }
 

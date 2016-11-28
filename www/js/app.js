@@ -1,9 +1,8 @@
-var apiUrl = 'http://fablysh.esy.es/api/';
+var apiUrl = 'http://192.168.43.67/barber-web/api/';
 var userInfo = {};
 angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
 
         .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
             $ionicConfigProvider.views.maxCache(0);
             $ionicConfigProvider.scrolling.jsScrolling(false);
             $ionicConfigProvider.tabs.position('bottom');
@@ -154,8 +153,45 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                 controller: 'SetAvailabilityController'
             });
 
+            $stateProvider.state('manage-accounts', {
+                url: '/accounts',
+                templateUrl: 'templates/manage-accounts.html',
+                controller: 'AccountsController'
+            });
+
+            $stateProvider.state('add-barber', {
+                url: '/add-barber',
+                templateUrl: 'templates/add-barber.html',
+                controller: 'AddBarberController'
+            });
+
 
             $urlRouterProvider.otherwise('/')
+        })
+
+        .directive('ionSideMenuContentScale', function ($timeout, $rootScope, $ionicModal) {
+            return {
+                restrict: 'AC',
+                link: function (scope, element, attrs) {
+                    scope.$watch(function () {
+                        return element.attr('style');
+                    }, function (newValue) {
+                        if (typeof newValue != "undefined") {
+                            var transform = newValue.replace("transform: translate3d", "");
+                            transform = transform.replace(/[^\w\s]/gi, '');
+                            transform = transform.replace(/px/gi, '');
+                            var axis = transform.split(" ");
+                            if (typeof axis[0] != "undefined" && parseInt(axis[0]) != 0) {
+                                element.addClass('side-menu-open');
+                            } else {
+                                element.removeClass('side-menu-open');
+                            }
+
+                        }
+
+                    });
+                }
+            }
         })
 
         .directive('googleplace', function () {
@@ -184,12 +220,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
         })
 
         .controller('AppCtrl', function ($state, $scope, $ionicHistory, $ionicSideMenuDelegate, $ionicPopup) {
-            ionic.Platform.ready(function () {
-
-            });
-
-
-
             $scope.toggleLeft = function () {
                 $ionicSideMenuDelegate.toggleLeft();
             };
@@ -227,6 +257,8 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                 });
             };
 
+
+
         })
 
         .controller('HomeController', function ($scope, $state) {
@@ -257,6 +289,36 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                         hideLoader($ionicLoading);
                         if (data.status) {
                             userInfo = data.data.User;
+                            if (userInfo.role_id == 2) {
+                                $("#merchant").show();
+                                $("#barber").hide();
+                            } else if (userInfo.role_id == 4) {
+                                $("#merchant").hide();
+                                $("#barber").show();
+                            }
+                            if (device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos") {
+                                pushNotification.register(
+                                        function(){
+                                            console.log("success");
+                                        },
+                                        function(){
+                                            console.log("error");
+                                        },
+                                        {
+                                            "senderID": "89616263869",
+                                            "ecb": "onNotification"
+                                        });
+                            } else {
+                                pushNotification.register(
+                                        tokenHandler,
+                                        errorHandler,
+                                        {
+                                            "badge": "true",
+                                            "sound": "true",
+                                            "alert": "true",
+                                            "ecb": "onNotificationAPN"
+                                        });
+                            }
                             $scope.goToPage('dashboard.bookings');
                         } else {
                             var myPopup = $ionicPopup.show({
@@ -480,9 +542,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                 } else if (status == 5) {
                     var changeStatus = "canceled";
                 } else if (status == 4) {
-                    var changeStatus = "finished";
-                } else {
-                    var changeStatus = "";
+                    var changeStatus = "completed";
                 }
                 var responsePromise = $http({
                     method: 'POST',
@@ -513,13 +573,11 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                                     onTap: function () {
                                         console.log($state);
                                         if (changeStatus == "accepted" || changeStatus == "declined") {
-                                            $scope.goToPage('dashboard.accepted');
+                                            $scope.$broadcast('processBookings');
                                         } else if (changeStatus == "started" || changeStatus == "canceled") {
-                                            $scope.goToPage('dashboard.ongoing');
-                                        } else if (changeStatus == "finished") {
-                                            $scope.goToPage('dashboard.completed');
-                                        } else {
-                                            $scope.goToPage('dashboard.pending');
+                                            $scope.$broadcast('processAccepted');
+                                        } else if (changeStatus == "completed") {
+                                            $scope.$broadcast('processOngoing');
                                         }
                                     }
                                 }
@@ -561,31 +619,52 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                     });
                 });
             }
+
         })
 
         .controller('BookingController', function ($scope, $state, $ionicLoading, $ionicPopup, $http) {
-            showLoader($ionicLoading);
-            var responsePromise = $http({
-                method: 'POST',
-                url: apiUrl + "merchantBookings",
-                data: $.param({
-                    user_id: userInfo.id,
-                    status: 0
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
+            $scope.getBookings = function () {
+                showLoader($ionicLoading);
+                var responsePromise = $http({
+                    method: 'POST',
+                    url: apiUrl + "merchantBookings",
+                    data: $.param({
+                        user_id: userInfo.id,
+                        status: 0
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
 
-            responsePromise.success(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                if (data.status) {
-                    $scope.appointments = data.data;
-                } else {
+                responsePromise.success(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                    if (data.status) {
+                        $scope.appointments = data.data;
+                    } else {
+                        $scope.appointments = [];
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: data.message,
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    }
+                });
+                responsePromise.error(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
                     var myPopup = $ionicPopup.show({
                         title: 'Error',
                         scope: $scope,
-                        template: data.message,
+                        template: "Invalid Request",
                         buttons: [
                             {
                                 text: 'Cancel'
@@ -596,24 +675,12 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                             }
                         ]
                     });
-                }
-            });
-            responsePromise.error(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                var myPopup = $ionicPopup.show({
-                    title: 'Error',
-                    scope: $scope,
-                    template: "Invalid Request",
-                    buttons: [
-                        {
-                            text: 'Cancel'
-                        },
-                        {
-                            text: '<b>OK</b>',
-                            type: 'button-assertive'
-                        }
-                    ]
                 });
+            }
+            $scope.getBookings();
+
+            $scope.$on('processBookings', function (e) {
+                $scope.getBookings();
             });
 
         })
@@ -967,28 +1034,48 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
         })
 
         .controller('AcceptedController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
-            showLoader($ionicLoading);
-            var responsePromise = $http({
-                method: 'POST',
-                url: apiUrl + "merchantBookings",
-                data: $.param({
-                    user_id: userInfo.id,
-                    status: 1
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
+            $scope.getAccepted = function () {
+                showLoader($ionicLoading);
+                var responsePromise = $http({
+                    method: 'POST',
+                    url: apiUrl + "merchantBookings",
+                    data: $.param({
+                        user_id: userInfo.id,
+                        status: 1
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
 
-            responsePromise.success(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                if (data.status) {
-                    $scope.appointments = data.data;
-                } else {
+                responsePromise.success(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                    if (data.status) {
+                        $scope.appointments = data.data;
+                    } else {
+                        $scope.appointments = [];
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: data.message,
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    }
+                });
+                responsePromise.error(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
                     var myPopup = $ionicPopup.show({
                         title: 'Error',
                         scope: $scope,
-                        template: data.message,
+                        template: "Invalid Request",
                         buttons: [
                             {
                                 text: 'Cancel'
@@ -999,50 +1086,58 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                             }
                         ]
                     });
-                }
-            });
-            responsePromise.error(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                var myPopup = $ionicPopup.show({
-                    title: 'Error',
-                    scope: $scope,
-                    template: "Invalid Request",
-                    buttons: [
-                        {
-                            text: 'Cancel'
-                        },
-                        {
-                            text: '<b>OK</b>',
-                            type: 'button-assertive'
-                        }
-                    ]
                 });
+            }
+            $scope.getAccepted();
+
+            $scope.$on('processAccepted', function (e) {
+                $scope.getAccepted();
             });
         })
 
-        .controller('OngoingController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
-            showLoader($ionicLoading);
-            var responsePromise = $http({
-                method: 'POST',
-                url: apiUrl + "merchantBookings",
-                data: $.param({
-                    user_id: userInfo.id,
-                    status: 3
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
+        .controller('OngoingController', function ($scope, $state, $ionicLoading, $http, $ionicPopup, $ionicModal) {
+            $scope.getOngoing = function () {
+                showLoader($ionicLoading);
+                var responsePromise = $http({
+                    method: 'POST',
+                    url: apiUrl + "merchantBookings",
+                    data: $.param({
+                        user_id: userInfo.id,
+                        status: 3
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
 
-            responsePromise.success(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                if (data.status) {
-                    $scope.appointments = data.data;
-                } else {
+                responsePromise.success(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                    if (data.status) {
+                        $scope.appointments = data.data;
+                    } else {
+                        $scope.appointments = [];
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: data.message,
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    }
+                });
+                responsePromise.error(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
                     var myPopup = $ionicPopup.show({
                         title: 'Error',
                         scope: $scope,
-                        template: data.message,
+                        template: "Invalid Request",
                         buttons: [
                             {
                                 text: 'Cancel'
@@ -1053,50 +1148,127 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                             }
                         ]
                     });
-                }
-            });
-            responsePromise.error(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                var myPopup = $ionicPopup.show({
-                    title: 'Error',
-                    scope: $scope,
-                    template: "Invalid Request",
-                    buttons: [
-                        {
-                            text: 'Cancel'
-                        },
-                        {
-                            text: '<b>OK</b>',
-                            type: 'button-assertive'
-                        }
-                    ]
                 });
+            }
+            $scope.getOngoing();
+
+            $scope.$on('processOngoing', function (e) {
+                $scope.getOngoing();
             });
+
+            $ionicModal.fromTemplateUrl('templates/payment.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.payment = modal;
+
+            });
+            $scope.openPayment = function (merchantId, appointmentId) {
+                $scope.payment.show();
+                $("#merchantId").val(merchantId);
+                $("#appointmentId").val(appointmentId);
+            };
+            $scope.closePayment = function () {
+                $scope.payment.hide();
+            };
+
+            $scope.submitForm = function (changeForm) {
+                if (changeForm.$valid) {
+                    showLoader($ionicLoading);
+                    var responsePromise = $http({
+                        method: 'POST',
+                        url: apiUrl + "createInvoice",
+                        data: $("#paymentForm").serialize(),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+
+                    responsePromise.success(function (data, status, headers, config) {
+                        hideLoader($ionicLoading);
+                        if (data.status) {
+                            $scope.closePayment();
+                            $scope.changeBookingStatus($("#appointmentId").val(), 4);
+                        } else {
+                            var myPopup = $ionicPopup.show({
+                                title: 'Error',
+                                scope: $scope,
+                                template: data.message,
+                                buttons: [
+                                    {
+                                        text: 'Cancel'
+                                    },
+                                    {
+                                        text: '<b>OK</b>',
+                                        type: 'button-assertive'
+                                    }
+                                ]
+                            });
+                        }
+                    });
+                    responsePromise.error(function (data, status, headers, config) {
+                        hideLoader($ionicLoading);
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: "Invalid Request",
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    });
+                }
+            }
         })
 
         .controller('CompletedController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
-            showLoader($ionicLoading);
-            var responsePromise = $http({
-                method: 'POST',
-                url: apiUrl + "merchantBookings",
-                data: $.param({
-                    user_id: userInfo.id,
-                    status: 4
-                }),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
+            $scope.getCompleted = function () {
+                showLoader($ionicLoading);
+                var responsePromise = $http({
+                    method: 'POST',
+                    url: apiUrl + "merchantBookings",
+                    data: $.param({
+                        user_id: userInfo.id,
+                        status: 4
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
 
-            responsePromise.success(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                if (data.status) {
-                    $scope.appointments = data.data;
-                } else {
+                responsePromise.success(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                    if (data.status) {
+                        $scope.appointments = data.data;
+                    } else {
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: data.message,
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    }
+                });
+                responsePromise.error(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
                     var myPopup = $ionicPopup.show({
                         title: 'Error',
                         scope: $scope,
-                        template: data.message,
+                        template: "Invalid Request",
                         buttons: [
                             {
                                 text: 'Cancel'
@@ -1107,24 +1279,12 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                             }
                         ]
                     });
-                }
-            });
-            responsePromise.error(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                var myPopup = $ionicPopup.show({
-                    title: 'Error',
-                    scope: $scope,
-                    template: "Invalid Request",
-                    buttons: [
-                        {
-                            text: 'Cancel'
-                        },
-                        {
-                            text: '<b>OK</b>',
-                            type: 'button-assertive'
-                        }
-                    ]
                 });
+            }
+            $scope.getCompleted();
+
+            $scope.$on('processCompleted', function (e) {
+                $scope.getCompleted();
             });
         })
 
@@ -1494,6 +1654,28 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
             }
         })
 
+        .controller('AccountsController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
+            showLoader($ionicLoading);
+            var responsePromise = $http({
+                method: 'POST',
+                url: apiUrl + "getBarberAccounts",
+                data: $.param({user_id: userInfo.id}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+
+            responsePromise.success(function (data, status, headers, config) {
+                hideLoader($ionicLoading);
+                if (data.status) {
+                    $scope.users = data.data;
+                }
+            });
+            responsePromise.error(function (data, status, headers, config) {
+                hideLoader($ionicLoading);
+            });
+        })
+
         .controller('SetAvailabilityController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
             $scope.data = {
                 'from': '',
@@ -1574,6 +1756,71 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages'])
                         hideLoader($ionicLoading);
                         if (data.status) {
                             $scope.goToPage('my-profile');
+                        } else {
+                            var myPopup = $ionicPopup.show({
+                                title: 'Error',
+                                scope: $scope,
+                                template: data.message,
+                                buttons: [
+                                    {
+                                        text: 'Cancel'
+                                    },
+                                    {
+                                        text: '<b>OK</b>',
+                                        type: 'button-assertive'
+                                    }
+                                ]
+                            });
+                        }
+                    });
+                    responsePromise.error(function (data, status, headers, config) {
+                        hideLoader($ionicLoading);
+                        var myPopup = $ionicPopup.show({
+                            title: 'Error',
+                            scope: $scope,
+                            template: "Invalid Request",
+                            buttons: [
+                                {
+                                    text: 'Cancel'
+                                },
+                                {
+                                    text: '<b>OK</b>',
+                                    type: 'button-assertive'
+                                }
+                            ]
+                        });
+                    });
+                }
+            }
+        })
+
+        .controller('AddBarberController', function ($scope, $state, $http, $ionicLoading, $ionicPopup) {
+            $scope.data = {
+                email: '',
+                password: '',
+                name: ''
+            };
+            $scope.submitForm = function (signupForm) {
+                if (signupForm.$valid) {
+                    showLoader($ionicLoading);
+                    var responsePromise = $http({
+                        method: 'POST',
+                        url: apiUrl + "addBarber",
+                        data: $.param({
+                            email: $scope.data.email,
+                            password: $scope.data.password,
+                            name: $scope.data.name,
+                            merchant_user_id: userInfo.id
+                        }),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+
+                    responsePromise.success(function (data, status, headers, config) {
+                        hideLoader($ionicLoading);
+                        if (data.status) {
+                            $scope.goToPage('manage-accounts');
                         } else {
                             var myPopup = $ionicPopup.show({
                                 title: 'Error',

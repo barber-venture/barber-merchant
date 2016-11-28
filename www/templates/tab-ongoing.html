@@ -32,7 +32,7 @@
                 {{booking.Appointment.message}}
             </ion-item>
             <ion-item>
-                <button class="button col" ng-click="changeBookingStatus(booking.Appointment.id,4)">Finish</button>
+                <button class="button col" ng-click="openPayment(booking.Appointment.merchant_id, booking.Appointment.id)">Finish</button>
             </ion-item>
         </div>
         
