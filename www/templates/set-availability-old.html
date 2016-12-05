@@ -1,0 +1,66 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Set Availability</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="addForm" id="setAvailabilityForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            
+                <ion-input class="item item-input item-select item-stacked-label">
+                    <ion-label class="input-label">Days</ion-label>
+                    <select multiple name="days[]" id="days" ng-model="data.days">
+                        <option value="Mon">Monday</option>
+                        <option value="Tue">Tuesday</option>
+                        <option value="Wed">Wednesday</option>
+                        <option value="Thu">Thursday</option>
+                        <option value="Fri">Friday</option>
+                        <option value="Sat">Saturday</option>
+                        <option value="Sun">Sunday</option>
+                    </select>
+                </ion-input>
+            
+                <h4 class="title center-align">Select Time</h4>
+                <ion-input class="item item-input item-stacked-label" 
+                           ng-class="{ 'has-errors' : addForm.from.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.from.$valid && addForm.$submitted}">
+                    <ion-label>From</ion-label>
+                    <input type="time" name="from" id="from" ng-model="data.from" class="float-left width-78" required>
+                    <i class="icon ion-clock size-25"></i>
+                </ion-input>
+
+                <div class="error-container" ng-show="addForm.from.$error && addForm.$submitted" 
+                     ng-messages="addForm.from.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> 
+                        Please select from time
+                    </div>
+                </div>
+                
+                <ion-input class="item item-input item-stacked-label" 
+                           ng-class="{ 'has-errors' : addForm.to.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.to.$valid && addForm.$submitted}">
+                    <ion-label>To</ion-label>
+                    <input type="time" name="to" id="to" ng-model="data.to" class="float-left width-78" required>
+                    <i class="icon ion-clock size-25"></i>
+                </ion-input>
+
+                <div class="error-container" ng-show="addForm.to.$error && addForm.$submitted" 
+                     ng-messages="addForm.to.$error">
+                    <div class="error" ng-message="required">
+                        <i class="ion-information-circled"></i> 
+                        Please select to time
+                    </div>
+                </div>
+                
+                <ion-input class="item item-input item-stacked-label">
+                    <ion-label>Other Info</ion-label>
+                    <textarea name="other" rows="4" ng-model="data.other"></textarea>
+                </ion-input>
+
+                <ion-input class="item-input padding">
+                    <input type="submit" class="button button-positive" value="Save" 
+                           ng-disabled="addForm.$invalid && addForm.$submitted">
+                </ion-input>
+        </form>
+    </ion-content>
+</ion-view>

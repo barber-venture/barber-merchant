@@ -1,0 +1,17 @@
+<ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">Notifications</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <div class="list margin-top-5" ng-repeat="notification in notifications">
+            <ion-item>
+                {{notification.PushMessage.subject}}
+            </ion-item>
+            <ion-item class="full-text">
+                {{notification.PushMessage.description}}
+            </ion-item>
+        </div>
+    </ion-content>
+
+</ion-view>

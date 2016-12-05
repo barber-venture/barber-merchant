@@ -34,6 +34,8 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/ionic.css">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link href="css/NativeSideMenu.css" rel="stylesheet">
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO4GjTIW_WW5VkWK2TYX2fF0T2Vf5TaTg&libraries=places"></script>
@@ -47,61 +49,92 @@
         <script type="text/javascript" src="js/ionic-native.js"></script>
         <script type="text/javascript" src="js/angular-messages.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/NativeSideMenu.js"></script>
+        <script src="js/moment.js"></script>
         <script type="text/javascript" src="js/function.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <title>Barber</title>
     </head>
     <body ng-controller="AppCtrl">
-        <!--ion-side-menus>
-    
-            <ion-side-menu side = "left">
-                <header class="bar bar-header bar-dark"><h1 class="title">Baber Merchant</h1></header>
-                <div class="list margin-top-16">
-                    <ion-item nav-clear menu-close ng-click="goToPage('dashboard.bookings')">Home</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('reviews')">Reviews</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('my-profile')">My Profile</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('settings')">Settings</ion-item>
-                </div>
-    
-    
-            </ion-side-menu>
-    
-            <ion-side-menu-content drag-content="false">
+    <ion-side-menus>
+
+        <!--ion-side-menu side = "left">
+            <div class="list margin-top-16 hide" id="merchant">
+                <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                <ion-item ng-click="goToPage('reviews')">Reviews</ion-item>
+                <ion-item ng-click="goToPage('my-profile')">My Profile</ion-item>
+                <ion-item ng-click="goToPage('manage-accounts')">Manage Accounts</ion-item>
+                <ion-item ng-click="goToPage('bank-details')">Bank Details</ion-item>
+                <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+            </div>
+            <div class="list margin-top-16 hide" id="barber">
+                <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+            </div>
+
+        </ion-side-menu>
+
+        <ion-side-menu-content drag-content="false">
+            <ion-nav-view>
+            </ion-nav-view>
+        </ion-side-menu-content>
+
+    </ion-side-menus-->
+
+        <drawer side="left">
+            <ion-content>
+                <h2>Menu</h2>
+                <ion-list id="merchant">
+                    <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                    <ion-item ng-click="goToPage('reviews')">Reviews</ion-item>
+                    <ion-item ng-click="goToPage('my-profile')">My Profile</ion-item>
+                    <ion-item ng-click="goToPage('manage-accounts')">Manage Accounts</ion-item>
+                    <ion-item ng-click="goToPage('bank-details')">Bank Details</ion-item>
+                    <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+                </ion-list>
+                <ion-list id="barber">
+                    <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                    <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+                </ion-list>
+            </ion-content>
+        </drawer>
+        <ion-pane>
+            <ion-content>
                 <ion-nav-view>
                 </ion-nav-view>
-            </ion-side-menu-content>
+            </ion-content>
+        </ion-pane>
+
+        <!--ion-side-menus enable-menu-with-back-views="false">
+    
+            <ion-side-menu-content ion-side-menu-content-scale>
+                <ion-nav-view>
+                </ion-nav-view>
+            </ion-side-menu-content> 
+    
+            <ion-side-menu side="left" class="bar-calm menu-left-axis">
+                <ion-header-bar class="bar-assertive">
+                    <h1 class="title">Baber Merchant</h1>
+                </ion-header-bar>
+    
+                <ion-content>
+                    <div class="list margin-top-16 hide" id="merchant">
+                        <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                        <ion-item ng-click="goToPage('reviews')">Reviews</ion-item>
+                        <ion-item ng-click="goToPage('my-profile')">My Profile</ion-item>
+                        <ion-item ng-click="goToPage('manage-accounts')">Manage Accounts</ion-item>
+                        <ion-item ng-click="goToPage('bank-details')">Bank Details</ion-item>
+                        <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+                    </div>
+                    <div class="list margin-top-16 hide" id="barber">
+                        <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                        <ion-item ng-click="goToPage('settings')">Settings</ion-item>
+                    </div>
+                </ion-content>
+            </ion-side-menu>
+    
     
         </ion-side-menus-->
 
-    <ion-side-menus enable-menu-with-back-views="false">
-
-        <ion-side-menu-content ion-side-menu-content-scale>
-            <ion-nav-view>
-            </ion-nav-view>
-        </ion-side-menu-content> 
-
-        <ion-side-menu side="left" class="bar-calm menu-left-axis">
-            <ion-header-bar class="bar-assertive">
-                <h1 class="title">Baber Merchant</h1>
-            </ion-header-bar>
-
-            <ion-content>
-                <div class="list margin-top-16 hide" id="merchant">
-                    <ion-item nav-clear menu-close ng-click="goToPage('dashboard.bookings')">Home</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('reviews')">Reviews</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('my-profile')">My Profile</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('manage-accounts')">Manage Accounts</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('settings')">Settings</ion-item>
-                </div>
-                <div class="list margin-top-16 hide" id="barber">
-                    <ion-item nav-clear menu-close ng-click="goToPage('dashboard.bookings')">Home</ion-item>
-                    <ion-item nav-clear menu-close ng-click="goToPage('settings')">Settings</ion-item>
-                </div>
-            </ion-content>
-        </ion-side-menu>
-
-
-    </ion-side-menus>
-
-</body>
+    </body>
 </html>

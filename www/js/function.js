@@ -76,3 +76,27 @@ function onNotification(e) {
     }
 }
 
+function getNotifications() {
+    $.ajax({
+        method: 'POST',
+        url: apiUrl + "getUnreadNotificationCount",
+        data: $.param({
+            user_id: userInfo.id
+        }),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.status) {
+                $(".badge").text(data.data);
+                $(".badge").removeClass("hide");
+            } else {
+                $(".badge").text("0");
+                $(".badge").addClass("hide");
+            }
+        }
+    });
+
+}
+

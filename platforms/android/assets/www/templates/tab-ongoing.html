@@ -1,10 +1,10 @@
 <ion-view title="Dashboard" cache-view="false">
     <ion-header-bar class="bar-positive">
-        <button menu-toggle = "left" class = "button button-icon icon ion-navicon show"></button>
+        <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
         <h1 class="title">On-Going</h1>
         <div class="buttons">
             <button class="button icon ion-search no-border" ng-click="dashboardSearch('dashboardSearch')"></button>
-            <button class="button icon ion-android-notifications no-border"></button>
+            <button class="button icon ion-android-notifications no-border" ng-click="goToPage('notifications')"><span class="badge badge-assertive icon-badge">0</span></button>
         </div>
 
 

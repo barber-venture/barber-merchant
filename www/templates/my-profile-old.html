@@ -1,0 +1,131 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive trans-header">
+        <!--button class="button icon ion-chevron-left no-border trans-header" ng-click="myGoBack()"></button-->
+        <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
+        <h1 class="title align-center">{{merchant.Merchant.name}}</h1>
+        <button class="button icon ion-edit no-border round-shape" ng-click="goToPage('edit-profile')"></button>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="bg-body">
+        <ion-slide-box ng-if="merchant.MerchantImage.length > 0">
+            <ion-slide ng-repeat="images in merchant.MerchantImage">
+                <img src="{{images.image}}" style="width:100%" />
+            </ion-slide>
+        </ion-slide-box>
+        <div class="list margin-top-5 padding">
+
+
+            <ion-item class="border-none list-paddin-0">
+                <div class="profile-detail">
+                    <div class="row">
+
+                        <div class="col-100">
+
+                            <h2 class="self-name align-left">{{merchant.Merchant.name}}</h2>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <i class="icon ion-location size-16" style="float:left;"></i>
+                            <div style="margin-left:5px;float:left; width:90%;"><p class="main-place">{{merchant.Merchant.address}}</p>
+
+                                <pre>{{merchant.Merchant.location}}</pre></div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="profile-rating">
+                    <div class="row">
+
+                        <div class="col text-right">
+
+                            <h2 class="rating">{{merchant.Merchant.current_rating}}</h2>
+                            <pre ng-repeat="(k,type) in merchant.MerchantType"><span ng-if="k > 0">,</span>{{type.name}}</pre>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeing-date">
+                    <div class="row">
+                        <div class="col-50 text-left">
+                            <p ng-repeat="(key,value) in merchant.MerchantWorkingDay">
+                                <span ng-if="key == 0">{{value.day}}</span> 
+                                <span ng-if="key == (merchant.MerchantWorkingDay.length - 1)"> - {{value.day}}</span>
+                            </p>
+                        </div>
+
+                        <div class="col-50">
+                            <p class="text-right" style="float:right;">{{merchant.Merchant.start_time| date:'shortTime'}} - {{merchant.Merchant.end_time| date:'shortTime'}}</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </ion-item>
+
+            <ion-item class="list-paddin-0 margin-top-5 border-none">
+
+                <div class="offering">
+                    <div class="row">
+                        <div class="col">
+                            <ion-label>Offering</ion-label>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <ion-list>
+                                <ul>
+                                    <li ng-repeat="products in merchant.MerchantOffering">
+
+                                        {{products.name}}
+
+                                    </li>
+
+                                </ul>
+
+
+                            </ion-list>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </ion-item>
+
+            <ion-item class="list-paddin-0 margin-top-5 border-none">
+                <div class="other-info">
+                    <div class="row shadow-real">
+                        <div class="col">
+                            <h2>Other Info</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <pre>{{merchant.Merchant.other_information}}</pre>
+
+                        </div></div></div>
+
+            </ion-item>
+
+        </div>
+
+    </ion-content>
+</ion-view>

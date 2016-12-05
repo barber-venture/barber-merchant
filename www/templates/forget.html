@@ -1,15 +1,16 @@
 <ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
-    <ion-header-bar class="bar-positive">
-        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
-        <h1 class="title">Forget Password</h1>
+    <ion-header-bar class="bar-positive com-header">
+        <!--button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button-->
+        <h1 class="title title-center">Forget Password</h1>
+        <a href="javascript:" ng-click="myGoBack()" class="cross-btn"><img src="img/cross.png"></a>
     </ion-header-bar>
     <ion-content scroll="false" class="padding">
-        <form name="forgetForm" ng-submit="submitForm(forgetForm)" class="list card no-margin" novalidate="" >
+        <form name="forgetForm" ng-submit="submitForm(forgetForm)" class="list card no-margin login-form box-shodow-none" novalidate="" >
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : forgetForm.email.$invalid && forgetForm.$submitted, 
         'no-errors' : forgetForm.email.$valid && forgetForm.$submitted}">
-                <ion-label >Email</ion-label>
-                <input type="email" name="email" placeholder="Email" ng-model="data.email" required>
+                <ion-label class="email" >&nbsp;</ion-label>
+                <input class="input-field1" type="email" name="email" placeholder="Email address" ng-model="data.email" required>
             </ion-input>
 
             <div class="error-container" ng-show="forgetForm.email.$error && forgetForm.$submitted" 
@@ -18,7 +19,7 @@
                     <i class="ion-information-circled"></i> 
                     Please enter email address
                 </div>
-                <div class="error" ng-show="forgetForm.email.$invalid && !forgetForm.email.$pristine">
+                <div class="error padding-top-15" ng-show="forgetForm.email.$invalid && !forgetForm.email.$pristine">
                     <i class="ion-information-circled"></i> 
                     Please enter valid email address
                 </div>

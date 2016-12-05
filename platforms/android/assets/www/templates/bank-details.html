@@ -1,0 +1,91 @@
+<ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
+        <h1 class="title">Bank Details</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+        <form name="addForm" id="addBarberForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.bank_name.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.bank_name.$valid && addForm.$submitted}">
+                <ion-label >Bank Name</ion-label>
+                <input type="text" name="bank_name" placeholder="Bank Name" ng-model="data.bank_name" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.bank_name.$error && addForm.$submitted" 
+                 ng-messages="addForm.bank_name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter bank name
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.bank_ifsc.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.bank_ifsc.$valid && addForm.$submitted}">
+                <ion-label >Bank Ifsc</ion-label>
+                <input type="text" name="bank_ifsc" placeholder="Bank Ifsc" ng-model="data.bank_ifsc" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.bank_ifsc.$error && addForm.$submitted" 
+                 ng-messages="addForm.bank_ifsc.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter bank ifsc
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.bank_branch.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.bank_branch.$valid && addForm.$submitted}">
+                <ion-label >Bank Branch</ion-label>
+                <input type="text" name="bank_branch" placeholder="Bank Branch" ng-model="data.bank_branch" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.bank_branch.$error && addForm.$submitted" 
+                 ng-messages="addForm.bank_branch.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter bank branch
+                </div>
+            </div>
+            
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.account_holder_name.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.account_holder_name.$valid && addForm.$submitted}">
+                <ion-label >Account Holder Name</ion-label>
+                <input type="text" name="account_holder_name" placeholder="Account Holder Name" ng-model="data.account_holder_name" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.account_holder_name.$error && addForm.$submitted" 
+                 ng-messages="addForm.account_holder_name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter account holder name
+                </div>
+            </div>
+            
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.account_number.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.account_number.$valid && addForm.$submitted}">
+                <ion-label >Account Number</ion-label>
+                <input type="text" name="account_number" placeholder="Account Number" ng-model="data.account_number" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.account_number.$error && addForm.$submitted" 
+                 ng-messages="addForm.account_number.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter account number
+                </div>
+            </div>
+
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Save" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+
+    </ion-content>
+
+</ion-view>

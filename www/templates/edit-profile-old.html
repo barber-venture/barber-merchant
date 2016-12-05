@@ -1,0 +1,144 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
+        <h1 class="title">ABC Saloon</h1>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="padding">
+        <form name="addForm" id="addForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.name.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.name.$valid && addForm.$submitted}">
+                <ion-label >Parlor Name</ion-label>
+                <input type="text" name="name" id="name" ng-model="data.name" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.name.$error && addForm.$submitted" 
+                 ng-messages="addForm.name.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter parlor name
+                </div>
+            </div>
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.registration_no.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.registration_no.$valid && addForm.$submitted}">
+                <ion-label >Parlor Registration No</ion-label>
+                <input type="text" name="registration_no" id="registration_no" ng-model="data.registration_no" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.registration_no.$error && addForm.$submitted" 
+                 ng-messages="addForm.registration_no.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter parlor registration no
+                </div>
+            </div>
+			<ul class="list">
+				<li class="item item-checkbox">
+				   <label class="checkbox">
+					 <input ng-model="gents" id="gents" name="type[gents]" type="checkbox">
+				   </label>
+				   Gents
+				</li>
+				<li class="item item-checkbox">
+				   <label class="checkbox">
+					 <input ng-model="ladies" id="ladies" name="type[ladies]" type="checkbox">
+				   </label>
+				   Ladies
+				</li>
+<li class="item item-checkbox">
+				   <label class="checkbox">
+					 <input ng-model="unisex" id="unisex" name="type[unisex]" type="checkbox">
+				   </label>
+				   Unisex
+				</li>
+				<li class="item item-checkbox">
+				   <label class="checkbox">
+					 <input ng-model="spa" id="spa" name="type[spa]" type="checkbox">
+				   </label>
+				   Spa
+				</li>  				
+			  </ul>
+            <ion-input class="item item-input item-stacked-label">
+                <ion-label >Add Offering</ion-label>
+                <div style="clear:both"></div>
+                <input type="text" name="offering[]" id="offering" class="float-left width-78" ng-model="data.offering">
+                <i class="icon ion-plus-circled size-25" ng-click="addOffering()"></i>
+                <div style="clear:both"></div>
+                <div id="moreOffering">
+                </div>
+                
+            </ion-input>
+            <ion-input class="item item-input item-stacked-label">
+                <ion-label >Add Photos</ion-label>
+                <div class="profile-pics">
+                    <img id="image1"  ng-click="showCamera('image1')" src="img/file-add.png" />
+                    <img id="image2"  ng-click="showCamera('image2')" src="img/file-add.png" />
+                    <img id="image3"  ng-click="showCamera('image3')" src="img/file-add.png" />
+                    <img id="image4"  ng-click="showCamera('image4')" src="img/file-add.png" />
+                    <img id="image5"  ng-click="showCamera('image5')" src="img/file-add.png" />
+                </div>
+                
+            </ion-input>
+            
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.contact.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.contact.$valid && addForm.$submitted}">
+                <ion-label class="float-left width-90">Contact</ion-label>
+                <i class="icon ion-android-call size-25 float-left margin-left-20"></i>
+                <input type="tel" name="contact" id="contact" ng-model="data.contact" required>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.contact.$error && addForm.$submitted" 
+                 ng-messages="addForm.contact.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter parlor contact number
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.location.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.location.$valid && addForm.$submitted}">
+                <div>
+                    <ion-label class="float-left width-90">Location</ion-label>
+                </div>
+                <div style="clear:both"></div>
+                <div>
+                    <input type="text" name="location" id="location" googleplace="" class="float-left width-78" ng-model="data.location" required> <!--ng-keyup="getLocations()"-->
+                    <input type="hidden" name="lat" id="lat" ng-model="data.lat" >
+                    <input type="hidden" name="lng" id="lng" ng-model="data.lng">
+                    <i class="icon ion-android-locate size-25" ng-click="getCurrentLocation()"></i>
+                </div>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.location.$error && addForm.$submitted" 
+                 ng-messages="addForm.location.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter parlor location
+                </div>
+            </div>
+
+            <ion-input class="item item-input item-stacked-label" 
+                       ng-class="{ 'has-errors' : addForm.address.$invalid && addForm.$submitted, 
+        'no-errors' : addForm.address.$valid && addForm.$submitted}">
+                <ion-label>Address</ion-label>
+                <textarea name="address" id="address" ng-model="data.address" required></textarea>
+            </ion-input>
+
+            <div class="error-container" ng-show="addForm.address.$error && addForm.$submitted" 
+                 ng-messages="addForm.address.$error">
+                <div class="error" ng-message="required">
+                    <i class="ion-information-circled"></i> 
+                    Please enter parlor address
+                </div>
+            </div>
+
+            <ion-input class="item-input padding">
+                <input type="submit" class="button button-positive" value="Next" 
+                       ng-disabled="addForm.$invalid && addForm.$submitted">
+            </ion-input>
+        </form>
+    </ion-content>
+</ion-view>
