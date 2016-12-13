@@ -1,10 +1,10 @@
 <ion-view title="Dashboard" cache-view="false">
-    <ion-header-bar class="bar-positive">
+    <ion-header-bar class="bar-positive trans-header1">
         <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
-        <h1 class="title">Completed</h1>
+        <h1 class="title align-center">Completed</h1>
         <div class="buttons">
-            <button class="button icon ion-search no-border" ng-click="dashboardSearch('dashboardSearch')"></button>
-            <button class="button icon ion-android-notifications no-border" ng-click="goToPage('notifications')"><span class="badge badge-assertive icon-badge">0</span></button>
+            <button class="button icon ion-search no-border bg-none" ng-click="dashboardSearch('dashboardSearch')"></button>
+            <button class="button icon ion-android-notifications no-border bg-none" ng-click="goToPage('notifications')"><span class="badge badge-assertive icon-badge">0</span></button>
         </div>
 
 
@@ -15,27 +15,29 @@
             <input type="search" ng-model="search" placeholder="Search">
         </label>
     </div>
-    <ion-content overflow-scroll="true" class="padding">
+    <ion-content overflow-scroll="true" class="padding top-93 bg-body">
         <div class="list margin-top-5" ng-repeat="booking in appointments | filter:search">
-            <ion-item class="item-thumbnail-left">
-                <img ng-if="booking.UserDetail.profile_picture == ''" src="img/profile.jpg" />
-                <img ng-if="booking.UserDetail.profile_picture != ''" src="{{booking.UserDetail.profile_picture}}" />
+            <ion-item class="item-thumbnail-left box-set">
+                <img class="pro-img"  ng-if="booking.UserDetail.profile_picture == ''" src="img/profile.jpg" />
+                <img class="pro-img" ng-if="booking.UserDetail.profile_picture != ''" src="{{booking.UserDetail.profile_picture}}" />
                 <div class="row">
                     <div class="col-50 left-align">{{booking.UserDetail.name}}</div>
                     
                 </div>
                 <div class="row">
-                    <div class="size-10">{{booking.UserDetail.gender}}</div>
+                    <div class="size-10 gen">{{booking.UserDetail.gender}}</div>
                 </div>
-            </ion-item>
-            <ion-item class="full-text">
-                {{booking.Appointment.message}}
-            </ion-item>
-            <ion-item>
-                <div class="row center-align">
+            
+            
+          
+                <div class="row center-align ti-cal-set">
                     <div class="col col-50 icon ion-calendar"> {{booking.Appointment.appointment_date| date: 'dd MMM. yyyy'}}</div>
                     <div class="col col-50 icon ion-clock"> {{booking.Appointment.appointment_time| date: 'shortTime'}}</div>
                 </div>
+                
+                <div class="row center-align full-text msg-set">
+                {{booking.Appointment.message}}
+            </div>
             </ion-item>
         </div>
         

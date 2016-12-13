@@ -2027,9 +2027,9 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 hideLoader($ionicLoading);
                 if (data.status) {
                     $scope.data.other = data.data.Merchant.other_information;
-                    $("#from").val(data.data.Merchant.start_time);
+                    $("#from").val(data.data.Merchant.set_start_time);
                     angular.element($('#from')).triggerHandler('input');
-                    $("#to").val(data.data.Merchant.end_time);
+                    $("#to").val(data.data.Merchant.set_end_time);
                     angular.element($('#to')).triggerHandler('input');
                     if (data.data.MerchantWorkingDay.length > 0) {
                         for (var i = 0; i < (data.data.MerchantWorkingDay.length); i++) {

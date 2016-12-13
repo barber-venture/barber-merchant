@@ -32,6 +32,16 @@
     unicode-range: U+0020-00FE;
 }
 
+@font-face {
+    font-family: 'Aileron';
+    src: url('../fonts/Aileron.eot');
+    src: url('../fonts/Aileron.eot?#iefix') format('embedded-opentype'), url('../fonts/Aileron.woff2') format('woff2'), url('../fonts/Aileron.woff') format('woff'), url('../fonts/Aileron.svg#Aileron') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-00FE;
+}
+
 body {
     -webkit-touch-callout: none;
     /* prevent callout to copy image, etc when tap to hold */
@@ -238,6 +248,10 @@ label.item.has-error {
     font-size: 1.3em;
 }
 
+.size-20 {
+    font-size: 1em;
+}
+
 .width-90 {
     width: 90% !important;
 }
@@ -359,7 +373,7 @@ ion-side-menu.menu-left-axis ion-item.item {
 
 .bg-full {
     background: url(../img/background.png) no-repeat center top;
-    background-size: cover;
+    background-size: cover; top: 0!important;
 }
 
 img {
@@ -402,9 +416,6 @@ img {
     width: 15px;
 }
 
-.has-header {
-    top: 0 !important;
-}
 
 .list.card {
     margin-top: 70px;
@@ -478,6 +489,7 @@ img {
     color: #fff;
     text-align: center;
     font-size: 17px;
+    margin-top: 30px;
 }
 
 .disable-user-behavior {
@@ -721,7 +733,6 @@ body {
     padding: 0!important;
 }
 
-
 .chacky-boxes .item-checkbox {
     padding: 10px;
 }
@@ -750,8 +761,8 @@ body {
     background: #222020;
     text-transform: capitalize;
     border-radius: 3px;
-    padding: 5px; 
-        margin-top: 10px;
+    padding: 5px;
+    margin-top: 10px;
 }
 
 .select-option .item {
@@ -759,22 +770,43 @@ body {
     color: #fff;
 }
 
-
 .select-option .input-label {
-  border-bottom: 1px solid #f36f21;
+    border-bottom: 1px solid #f36f21;
     margin-bottom: 5px;
     padding: 5px 8px;
     color: #fff;
-      max-width: 100%; width:100%;
+    max-width: 100%;
+    width: 100%;
 }
 
-.select-option.add-offering input[type="text"]{ background: none; border-bottom: 1px solid #fff; color: #fff; width: 90% !important; max-width:90%; margin-bottom: 10px; padding-left: 10px!important;}
+.select-option.add-offering input[type="text"] {
+    background: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    width: 90% !important;
+    max-width: 90%;
+    margin-bottom: 10px;
+    padding-left: 10px!important;
+}
 
 .item-stacked-label .icon {
     padding: 10px 0 0 5px;
+    float: left;
 }
-.trans-header1{ background-color: #191818 !important; border-color:#191818 !important; }
 
+.trans-header1 {
+    background-color: #191818 !important;
+    border-color: #191818 !important;
+}
+
+.for-input .item-stacked-label {
+    height: auto !important;
+    margin-bottom: 0;
+}
+
+.for-input .item-stacked-label input {
+    padding-left: 0 !important;
+}
 
 
 /*-- edit profile --*/
@@ -782,12 +814,189 @@ body {
 
 /*-- set availability --*/
 
+.days-count select option {
+    float: left;
+    width: 100%;
+}
 
-.days-count select option{ float: left; width: 100%;}
-.heding-left-set{font-family: 'Aileron Thin'; text-transform: capitalize; margin-bottom: 0;}
+.heding-left-set {
+    font-family: 'Aileron Thin';
+    text-transform: capitalize;
+    margin-bottom: 0;
+}
+
+.item-select.item-stacked-label select {
+    max-width: 100%;
+    width: 100%;
+    background: #222020;
+    color: #fff;
+    font-family: 'Aileron Thin';
+    padding: 10px;
+}
+
+#setAvailabilityForm input {
+    padding-left: 5px !important;
+}
 
 
 /*-- set availability --*/
+
+
+/*-- booking-pending --*/
+
+.tabs {
+    background-color: #f36f21 !important;
+    border: none;
+}
+
+.tabs span {
+    color: #fff;
+    font-size: 12px;
+    line-height: 46px;
+    font-family: 'Aileron';
+}
+
+.tabs .tab-item.tab-item-active {
+    border-bottom: 4px solid #fff;
+}
+
+.marg-top-50 {
+    margin-top: 50px;
+}
+
+.top-93 {
+    top: 93px !important
+}
+
+.btn-equ {
+    float: left;
+    font-size: 12px;
+    height: 28px;
+    line-height: 24px;
+    margin-right: 10px;
+    margin-top: 10px;
+    min-height: auto;
+    min-width: auto;
+    padding: 0 !important;
+    width: 60px;
+    font-family: 'Aileron';
+    color: #fff;
+}
+
+.ti-cal-set {
+   border: 1px dotted #cfcfcf;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) inset;
+margin: 0 !important; padding: 0 !important;
+}
+
+.ti-cal-set div {
+    font-size: 11px;
+    text-align: left;
+}
+
+
+
+.msg-set {
+    padding: 0;
+    font-size: 12px;
+    text-transform: capitalize;
+    margin: 2px 0 !important;
+}
+
+.pad-0 {
+    padding: 0 !important;
+}
+
+.dec-btn {
+    background: #000;
+}
+
+.acc-btn {
+    background: #f36f21;
+}
+
+.btn-equ:hover {
+    color: #fff;
+}
+
+.gen {
+    color: #f36f21;
+    text-transform: capitalize;
+}
+
+.pro-img {
+    border-radius: 50%;
+}
+
+.box-set {
+    border: none;
+    border-radius: 3px;
+}
+
+.pad-bottom-0 {
+    padding-bottom: 0 !important;
+}
+
+.badge {
+    padding: 3px 7px !important;
+    vertical-align: super!important;
+    font-size: 13px!important;
+}
+
+
+/*-- booking-pending --*/
+
+/*-- menu --*/
+
+.menu_bar .item{ background: #f36f21; color: #fff;font-family: 'Aileron';  border-color: #f97e35;
+    border-style: solid;
+    border-width: 1px;}
+.menu-dp img{ width: 100px; height: auto;}
+.menu-dp{ text-align: center;}
+.menu-dp h2{color: #fff;font-family: 'Aileron'; font-size: 20px;}
+.menu-dp.item p{ font-family: 'Aileron Thin'; font-size: 16px; color: #fff;}
+.menu_bar .list .item{ background: url(../img/menu-icon.png) no-repeat left #f36f21;}
+.home.item {
+  background-position: 7px 14px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;
+}
+
+
+.review.item {
+  background-position: 6px -133px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;
+}
+
+
+.profile.item {
+  background-position: 5px -207px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;
+}
+
+.manage-acco.item {
+  background-position: 5px -283px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;
+}
+
+
+.bank-det.item {
+  background-position: 5px -440px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;
+}
+
+.setting.item {
+background-position: 3px -605px !important;
+background-size: 26px auto !important;
+padding-left: 35px;
+}
+
+
+/*-- menu --*/
 
 @media screen and (max-width:480px) {
     .profile-detail {

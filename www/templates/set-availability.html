@@ -7,7 +7,7 @@
         <form name="addForm" id="setAvailabilityForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
             
                 <ion-input style="height:auto;" class="item item-input item-select item-stacked-label days-count">
-                    <ion-label class="input-label">Days</ion-label>
+                    <!--ion-label class="input-label">Days</ion-label-->
                     <select multiple name="days[]" id="days" ng-model="data.days">
                         <option value="Mon">Monday</option>
                         <option value="Tue">Tuesday</option>
@@ -26,8 +26,8 @@
     margin: 0 2%;"
                            ng-class="{ 'has-errors' : addForm.from.$invalid && addForm.$submitted, 
         'no-errors' : addForm.from.$valid && addForm.$submitted}">
-                     <i class="icon ion-clock size-25"></i>
-                    <ion-label>From</ion-label>
+                     <i class="icon ion-clock size-20"></i>
+                    <!--ion-label>From</ion-label-->
                     <input type="time" name="from" id="from" ng-model="data.from" class="float-left width-78" required>
                    
                 </ion-input>
@@ -46,8 +46,8 @@
     margin: 0 2%;"
                            ng-class="{ 'has-errors' : addForm.to.$invalid && addForm.$submitted, 
         'no-errors' : addForm.to.$valid && addForm.$submitted}">
-                     <i class="icon ion-clock size-25"></i>
-                    <ion-label>To</ion-label>
+                     <i class="icon ion-clock size-20"></i>
+                    <!--ion-label>To</ion-label-->
                     <input type="time" name="to" id="to" ng-model="data.to" class="float-left width-78" required>
                    
                 </ion-input>

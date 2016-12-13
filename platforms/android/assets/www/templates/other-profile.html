@@ -21,7 +21,12 @@
                     <ion-item>
                         <div class="row">
                             <div class="col-50 left-align">{{review.Merchant.name}}</div>
-                            <div class="col-50 right-align size-10"><span style="margin-left:5%" ng-repeat="type in review.Merchant.MerchantType">{{type.name}}</span></div>
+                            <div class="col-50 right-align size-10">
+                                <span ng-repeat="(k,type) in review.Merchant.MerchantType">
+                                    <span ng-if="k > 0">,</span>
+                                    {{type.name}}
+                                </span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="size-10">{{review.Merchant.address}}</div>

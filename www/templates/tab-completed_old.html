@@ -1,0 +1,43 @@
+<ion-view title="Dashboard" cache-view="false">
+    <ion-header-bar class="bar-positive">
+        <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
+        <h1 class="title">Completed</h1>
+        <div class="buttons">
+            <button class="button icon ion-search no-border" ng-click="dashboardSearch('dashboardSearch')"></button>
+            <button class="button icon ion-android-notifications no-border" ng-click="goToPage('notifications')"><span class="badge badge-assertive icon-badge">0</span></button>
+        </div>
+
+
+    </ion-header-bar>
+    <div id="dashboardSearch" class="bar bar-subheader hide">
+        <label class="item-input textbox-search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" ng-model="search" placeholder="Search">
+        </label>
+    </div>
+    <ion-content overflow-scroll="true" class="padding">
+        <div class="list margin-top-5" ng-repeat="booking in appointments | filter:search">
+            <ion-item class="item-thumbnail-left">
+                <img ng-if="booking.UserDetail.profile_picture == ''" src="img/profile.jpg" />
+                <img ng-if="booking.UserDetail.profile_picture != ''" src="{{booking.UserDetail.profile_picture}}" />
+                <div class="row">
+                    <div class="col-50 left-align">{{booking.UserDetail.name}}</div>
+                    
+                </div>
+                <div class="row">
+                    <div class="size-10">{{booking.UserDetail.gender}}</div>
+                </div>
+            </ion-item>
+            <ion-item class="full-text">
+                {{booking.Appointment.message}}
+            </ion-item>
+            <ion-item>
+                <div class="row center-align">
+                    <div class="col col-50 icon ion-calendar"> {{booking.Appointment.appointment_date| date: 'dd MMM. yyyy'}}</div>
+                    <div class="col col-50 icon ion-clock"> {{booking.Appointment.appointment_time| date: 'shortTime'}}</div>
+                </div>
+            </ion-item>
+        </div>
+        
+    </ion-content>
+</ion-view>

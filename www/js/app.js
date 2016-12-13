@@ -4,9 +4,9 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
 
         .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
             $ionicConfigProvider.views.maxCache(10);
-            $ionicConfigProvider.views.transition('none');
+            //$ionicConfigProvider.views.transition('none');
             $ionicConfigProvider.scrolling.jsScrolling(false);
-            $ionicConfigProvider.tabs.position('bottom');
+            $ionicConfigProvider.tabs.position('top');
             $stateProvider.state('home', {
                 url: '/',
                 templateUrl: 'templates/home.html',
@@ -245,7 +245,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
 
             $scope.myGoBack = function () {
                 $ionicHistory.goBack();
-                var options = {
+                /*var options = {
                     "direction": "right", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
                     "duration": 500, // in milliseconds (ms), default 400
                     "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
@@ -261,7 +261,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         function (msg) {
                             alert("error: " + msg)
                         } // called in case you pass in weird values
-                );
+                );*/
             };
 
             $scope.goToPage = function (pageId, params) {
@@ -273,7 +273,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     });
                 }
                 $scope.closeDrawer();
-                var options = {
+                /*var options = {
                     "direction": "left", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
                     "duration": 500, // in milliseconds (ms), default 400
                     "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
@@ -290,7 +290,7 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         function (msg) {
                             alert("error: " + msg)
                         } // called in case you pass in weird values
-                );
+                );*/
             };
 
             $scope.openMenu = function () {
@@ -2027,9 +2027,9 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 hideLoader($ionicLoading);
                 if (data.status) {
                     $scope.data.other = data.data.Merchant.other_information;
-                    $("#from").val(data.data.Merchant.start_time);
+                    $("#from").val(data.data.Merchant.set_start_time);
                     angular.element($('#from')).triggerHandler('input');
-                    $("#to").val(data.data.Merchant.end_time);
+                    $("#to").val(data.data.Merchant.set_end_time);
                     angular.element($('#to')).triggerHandler('input');
                     if (data.data.MerchantWorkingDay.length > 0) {
                         for (var i = 0; i < (data.data.MerchantWorkingDay.length); i++) {

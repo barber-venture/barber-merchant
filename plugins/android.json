@@ -30,6 +30,9 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
         }
     },
     "dependent_plugins": {

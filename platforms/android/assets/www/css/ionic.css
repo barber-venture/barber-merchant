@@ -8683,8 +8683,8 @@ progress {
       color: #fff;
       text-decoration: none; }
     .button.button-positive.active, .button.button-positive.activated {
-      border-color: #a2a2a2;
-      background-color: #0c60ee; }
+      border-color: #f36f21;
+      background-color: #f36f21; }
     .button.button-positive.button-clear {
       border-color: transparent;
       background: none;
