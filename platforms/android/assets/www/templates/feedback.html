@@ -1,14 +1,14 @@
 <ion-view title="Dashboard" cache-view="false">
-    <ion-header-bar class="bar-positive">
-        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
-        <h1 class="title">Feedback</h1>
+    <ion-header-bar class="bar-positive trans-header1">
+        <button class="button icon ion-chevron-left no-border bg-none" ng-click="myGoBack()"></button>
+        <h1 class="title align-center">Feedback</h1>
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="padding">
-        <form name="changeForm" id="feedbackForm" ng-submit="submitForm(changeForm)" class="list card no-margin" novalidate="" >
+        <form name="changeForm" id="feedbackForm" ng-submit="submitForm(changeForm)" class="list card marg-none no-margin" novalidate="" >
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : changeForm.message.$invalid && changeForm.$submitted, 
         'no-errors' : changeForm.message.$valid && changeForm.$submitted}">
-                <ion-label >Feedback</ion-label>
+            
                 <textarea name="message" placeholder="Feedback" ng-model="data.message" required></textarea>
             </ion-input>
 

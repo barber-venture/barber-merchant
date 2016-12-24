@@ -5,7 +5,7 @@
         <h1 class="title align-center">{{merchant.Merchant.name}}</h1>
         <button class="button icon ion-edit no-border round-shape" ng-click="goToPage('edit-profile')"></button>
     </ion-header-bar>
-    <ion-content overflow-scroll="true" class="bg-body">
+    <ion-content overflow-scroll="true" class="bg-body" style="top:0;">
         <ion-slide-box ng-if="merchant.MerchantImage.length > 0">
             <ion-slide ng-repeat="images in merchant.MerchantImage">
                 <img src="{{images.image}}" style="width:100%" />
@@ -52,15 +52,14 @@
                 <div class="timeing-date">
                     <div class="row">
                         <div class="col-50 text-left">
-                            <!--p ng-repeat="(key,value) in merchant.MerchantWorkingDay">
+                            <p ng-repeat="(key,value) in merchant.MerchantWorkingDay">
                                 <span ng-if="key == 0">{{value.day}}</span> 
                                 <span ng-if="key == (merchant.MerchantWorkingDay.length - 1)"> - {{value.day}}</span>
-                            </p-->
-                            <p>{{merchant.Merchant.working_day}}</p>
+                            </p>
                         </div>
 
                         <div class="col-50">
-                            <p class="text-right" style="float:right;">{{merchant.Merchant.start_time}} - {{merchant.Merchant.end_time}}</p>
+                            <p class="text-right" style="float:right;">{{merchant.Merchant.start_time | date:'shortTime'}} - {{merchant.Merchant.end_time | date:'shortTime'}}</p>
 
                         </div>
 

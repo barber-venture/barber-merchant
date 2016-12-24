@@ -3,7 +3,7 @@
         <button class="button icon ion-chevron-left no-border bg-none" ng-click="myGoBack()"></button>
         <h1 class="title align-center">Edit Profile</h1>
     </ion-header-bar>
-    <ion-content overflow-scroll="true" class="padding for-input">
+    <ion-content overflow-scroll="true" class="padding for-input" style="top:0">
         <form name="addForm" id="addForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
             <ion-input class="item item-input item-stacked-label input-border-bottom" 
                        ng-class="{ 'has-errors' : addForm.name.$invalid && addForm.$submitted, 

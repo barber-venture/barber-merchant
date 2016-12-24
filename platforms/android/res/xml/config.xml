@@ -27,6 +27,9 @@
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
     <name>Fablysh Business</name>
     <description>
         Fablysh business is a platform where saloon owners can deal with appointments online.
@@ -46,7 +49,4 @@
     <preference name="loglevel" value="DEBUG" />
     <preference name="SplashScreen" value="splash" />
     <preference name="SplashScreenDelay" value="3000" />
-    <feature name="SocialSharing">
-        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
-    </feature>
 </widget>

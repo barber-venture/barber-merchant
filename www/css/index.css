@@ -303,7 +303,7 @@ label.item.has-error {
     position: relative !important;
     top: 5% !important;
     left: 10% !important;
-    width: 50% !important;
+    width: 45% !important;
     max-width: none !important;
     max-height: none !important;
 }
@@ -319,6 +319,9 @@ label.item.has-error {
     top: 0;
     right: 0;
 }
+
+
+.col-f{ color: #fff;}
 
 .margin-top-5 {
     margin-top: 5% !important;
@@ -418,7 +421,7 @@ img {
 
 
 .list.card {
-    margin-top: 70px;
+    margin-top: 60px;
     padding: 20px;
 }
 
@@ -546,7 +549,7 @@ img {
 /*-- my profile --*/
 
 .bg-body {
-    background: #edecec;
+    background: #fafafa;
 }
 
 .border-none {
@@ -743,7 +746,7 @@ body {
 }
 
 .item-stacked-label.input-border-bottom {
-    border-bottom: 1px solid #767373!important;
+    border-bottom: 1px solid #a6a3a3!important;
 }
 
 .checkbox input:checked:before,
@@ -806,6 +809,7 @@ body {
 
 .for-input .item-stacked-label input {
     padding-left: 0 !important;
+    font-family: 'Aileron Thin';
 }
 
 
@@ -869,18 +873,18 @@ body {
 }
 
 .btn-equ {
-    float: left;
-    font-size: 12px;
-    height: 28px;
-    line-height: 24px;
-    margin-right: 10px;
-    margin-top: 10px;
-    min-height: auto;
-    min-width: auto;
-    padding: 0 !important;
-    width: 60px;
-    font-family: 'Aileron';
-    color: #fff;
+  color: #fff;
+float: left;
+font-family: "Aileron";
+font-size: 12px;
+height: 28px;
+line-height: 24px;
+margin-right: 5%;
+margin-top: 10px;
+min-height: auto;
+min-width: auto;
+padding: 0 !important;
+width: 45%;
 }
 
 .ti-cal-set {
@@ -995,8 +999,86 @@ background-size: 26px auto !important;
 padding-left: 35px;
 }
 
+.menu_bar{background: #f36f21 !important;}
+
 
 /*-- menu --*/
+
+/*-- change password --*/
+
+.list.card.marg-none{ margin: 0 !important; }
+
+
+.list.card.marg-none .item-input input, .list.card.marg-none .item-input textarea{  padding-left: 0 !important; font-family: 'Aileron Thin';  font-size: 18px !important; color: #111;}
+.list.card.marg-none .item-stacked-label {
+  border-bottom: 1px solid #adabab !important;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder{
+  color: #111 !important;
+}
+
+input[type="submit"]{ color: #fff !important;}
+
+
+.about-us-page p{ line-height: 22px;
+margin: 15px 0;
+text-align: justify;
+text-transform: capitalize;}
+
+
+.setting-main .item{
+  background: #f36f21 none repeat scroll 0 0;
+    border-color: #f97e35;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+    font-family: "Aileron";}
+
+.setting-main .item i{ color: #fff;}
+
+
+/*-- change password --*/
+
+/*-- Other profile --*/
+
+.bg-top-pro{ background: url(../img/bg-profile.png) no-repeat top center; background-size: 100%;padding: 75px 30px 65px 30px;}
+
+
+.li-tb {
+    float: left;
+    width: 33%;
+    padding: 0 2%;
+    border-right: 1px solid #9f9d9d;
+    margin: 10px 0;
+}
+
+.li-tb:last-child{ border-right: none;}
+
+
+.main-li-tb {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+
+
+.rating-show{ color: #454545; font-size: 14px;}
+.rating-show span{ color: #444; font-size: 12px !important;}
+
+.gen span{ color: #444; font-size: 12px; font-weight: normal;}
+
+.gen{ font-weight: 600;  font-size: 13px;}
+
+
+/*-- Other profile --*/
+
+
+.box-set-upper {
+  box-shadow: 0 0 5px rgba(190, 190, 190, 0.3);
+
+}
 
 @media screen and (max-width:480px) {
     .profile-detail {

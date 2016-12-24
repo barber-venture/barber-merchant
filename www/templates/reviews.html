@@ -4,7 +4,7 @@
         <h1 class="title align-center">Reviews</h1>
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="padding bg-body">
-        <div class="list margin-top-5" ng-repeat="review in reviews">
+        <div class="list margin-top-5 box-set-upper" ng-repeat="review in reviews">
             <ion-item class="item-thumbnail-left box-set" ng-click="goToPage('other-profile',review.UserDetail.user_id)">
                 <img class="pro-img" ng-if="review.UserDetail.profile_picture == ''" src="img/profile.jpg" />
                 <img class="pro-img" ng-if="review.UserDetail.profile_picture != ''" src="{{review.UserDetail.profile_picture}}" />
@@ -15,13 +15,13 @@
                      
                 </div>
                <div class="row followr">
-                   <div class=" col-50 left-align size-10 gen">Rated {{review.Review.rating}}</div>
-                    <div class=" col-50 size-10">Follwers {{review.UserDetail.current_followers}}</div>
+                   <div class=" col-50 left-align gen"><span>Rated</span> {{review.Review.rating}}</div>
+                    <div class=" col-50 gen"><span>Follwers</span> {{review.UserDetail.current_followers}}</div>
                 </div>
                
                 <div class="row center-align ti-cal-set" style="padding:2px 5px !important;">
-                    <div class="col col-50 icon ion-calendar"> {{review.Review.created_date}}</div>
-                    <div class="col col-50 icon ion-clock"> {{review.Review.created_time}}</div>
+                    <div class="col-50 icon ion-calendar"> {{review.Review.created_date}}</div>
+                    <div class="col-50 icon ion-clock"> {{review.Review.created_time}}</div>
                 </div>
                 
                  <div class="row center-align full-text msg-set">

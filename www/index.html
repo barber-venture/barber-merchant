@@ -83,10 +83,10 @@
         <drawer side="left" class="menu_bar">
             <ion-content>
                 <ion-item class="menu-dp" >
-                 <img class="pro-img" src="img/profile.jpg" />
+                 <img class="pro-img" id="userImage" src="img/profile.jpg" />
                     
-                    <h2>Nick Slater</h2>
-                    <p>San Francisco,CA</p>
+                    <h2 id="userName">Nick Slater</h2>
+                    <p id="userAddress">San Francisco,CA</p>
                 
                 </ion-item>
                 <ion-list id="merchant">
@@ -98,8 +98,8 @@
                     <ion-item class="setting" ng-click="goToPage('settings')">Settings</ion-item>
                 </ion-list>
                 <ion-list id="barber">
-                    <ion-item class="home" ng-click="goToPage('dashboard.bookings')">Home</ion-item>
-                    <ion-item class="setting" ng-click="goToPage('settings')">Settings</ion-item>
+                    <ion-item ng-click="goToPage('dashboard.bookings')">Home</ion-item>
+                    <ion-item ng-click="goToPage('settings')">Settings</ion-item>
                 </ion-list>
             </ion-content>
         </drawer>
