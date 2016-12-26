@@ -26,12 +26,12 @@
                   
                           <div class="profile-detail" style="margin-top:0">
                         <div class="row">
-                            <div class="self-name align-left">{{review.Merchant.name}}</div>
+                            <h2 class="self-name align-left">{{review.Merchant.name}}</h2>
                             
                         </div>
                         <div class="row">
                             <i class="icon ion-location size-16" style="float:left;"></i>
-                            <div class="size-12">{{review.Merchant.address}}</div>
+                            <div class="main-place col pad-0">{{review.Merchant.address}}</div>
                         </div>
                         </div>
                     
@@ -40,14 +40,16 @@
                     
                     <div class="right-align size-10">
                         
-                        <pre ng-repeat="type in review.Merchant.MerchantType">{{type.name}}</pre></div>
+                        <div class="add-full type-fix" ng-repeat="type in review.Merchant.MerchantType">{{type.name}}</div>
+                        
+                        </div>
                     
                     
                     </div>
                     
                     <div class="rating-show">
                         <div class="row">
-                     <div class="col"><span>Rated</span> {{review.Review.rating}}</div>
+                     <div class="col gen"><span>Rated</span> {{review.Review.rating}}</div>
                             </div>
                     </div>
                     

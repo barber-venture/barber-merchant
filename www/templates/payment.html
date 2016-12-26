@@ -1,15 +1,14 @@
 <ion-modal-view>
-    <ion-header-bar class="bar-positive">
-        <h1 class="title">Create Invoice</h1>
-        <button class="button button-primary no-border" ng-click="closePayment()">Cancel</button>
+    <ion-header-bar class="bar-positive trans-header1">
+        <h1 class="title align-center">Create Invoice</h1>
+        <button class="button button-primary no-border no-border bg-none" ng-click="closePayment()">Cancel</button>
     </ion-header-bar>
     <ion-content overflow-scroll="true">
-        <form name="addForm" id="paymentForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+        <form name="addForm" id="paymentForm" ng-submit="submitForm(addForm)" class="list card marg-none no-margin" novalidate="" >
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : addForm.details.$invalid && addForm.$submitted, 
         'no-errors' : addForm.details.$valid && addForm.$submitted}">
-                <ion-label >Details of work</ion-label>
-                <textarea name="details" ng-model="data.details" rows="5" required></textarea>
+                <textarea name="details" ng-model="data.details" placeholder="Details of work" rows="5" required></textarea>
             </ion-input>
 
             <div class="error-container" ng-show="addForm.details.$error && addForm.$submitted" 
@@ -23,8 +22,7 @@
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : addForm.amount.$invalid && addForm.$submitted, 
         'no-errors' : addForm.amount.$valid && addForm.$submitted}">
-                <ion-label >Total Amount</ion-label>
-                <input name="amount" type="tel" ng-model="data.amount"  required />
+                <input name="amount" placeholder="Total Amount" type="tel" ng-model="data.amount"  required />
                 <input name="merchant_id" id="merchantId" type="hidden" ng-model="data.merchant_id" />
                 <input name="appointment_id" id="appointmentId" type="hidden" ng-model="data.appointment_id" />
             </ion-input>
@@ -37,7 +35,7 @@
                 </div>
             </div>
 
-            <ion-input class="item-input padding">
+            <ion-input class="item-input padding" style="margin-bottom:0;">
                 <input type="submit" ng-disabled="addForm.$invalid && addForm.$submitted" class="button button-positive" value="Create" />
             </ion-input>
         </form>

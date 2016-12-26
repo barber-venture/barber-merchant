@@ -43,6 +43,7 @@ function showAlert(message, alertCallback, title, buttonName) {
     navigator.notification.alert(message, alertCallback, title, buttonName)
 }
 
+
 function alertDismissed() {
 
 }

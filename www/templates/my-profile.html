@@ -18,19 +18,20 @@
                 <div class="profile-detail">
                     <div class="row">
 
-                        <div class="col-100">
+                        <div class="col add-full pad-0">
 
                             <h2 class="self-name align-left">{{merchant.Merchant.name}}</h2>
 
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col pad-0">
 
                             <i class="icon ion-location size-16" style="float:left;"></i>
-                            <div style="margin-left:5px;float:left; width:90%;"><p class="main-place">{{merchant.Merchant.address}}</p>
+                            <div style="margin-left:5px;float:left; width:90%;">
+                                <div class="main-place col pad-0">{{merchant.Merchant.address}}</div>
                                 
-                                <pre>{{merchant.Merchant.location}}</pre></div>
+                                <div class="col add-full pad-0">{{merchant.Merchant.location}}</div></div>
 
                         </div>
 
@@ -43,7 +44,7 @@
                         <div class="col text-right">
 
                             <h2 class="rating">{{merchant.Merchant.current_rating}}</h2>
-                            <pre ng-repeat="(k,type) in merchant.MerchantType"><span ng-if="k > 0">,</span>{{type.name}}</pre>
+                            <div class="add-full type-fix" ng-repeat="(k,type) in merchant.MerchantType"><span ng-if="k > 0">,</span>{{type.name}}</div>
 
                         </div>
                     </div>

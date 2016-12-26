@@ -1,14 +1,13 @@
 <ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
-    <ion-header-bar class="bar-positive">
-        <button class="button icon ion-chevron-left no-border" ng-click="myGoBack()"></button>
-        <h1 class="title">Add Account</h1>
+    <ion-header-bar class="bar-positive trans-header1">
+        <button class="button icon ion-chevron-left no-border no-border bg-none" ng-click="myGoBack()"></button>
+        <h1 class="title align-center">Add Account</h1>
     </ion-header-bar>
     <ion-content class="padding">
-        <form name="addForm" id="addBarberForm" ng-submit="submitForm(addForm)" class="list card no-margin" novalidate="" >
+        <form name="addForm" id="addBarberForm" ng-submit="submitForm(addForm)" class="list card marg-none no-margin" novalidate="" >
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : addForm.email.$invalid && addForm.$submitted, 
         'no-errors' : addForm.email.$valid && addForm.$submitted}">
-                <ion-label >Email</ion-label>
                 <input type="email" name="email" placeholder="Email" ng-model="data.email" required>
             </ion-input>
 
@@ -27,7 +26,6 @@
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : addForm.password.$invalid && addForm.$submitted, 
         'no-errors' : addForm.password.$valid && addForm.$submitted}">
-                <ion-label >Password</ion-label>
                 <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
             </ion-input>
 
@@ -42,7 +40,6 @@
             <ion-input class="item item-input item-stacked-label" 
                        ng-class="{ 'has-errors' : addForm.name.$invalid && addForm.$submitted, 
         'no-errors' : addForm.name.$valid && addForm.$submitted}">
-                <ion-label >Full Name</ion-label>
                 <input type="text" name="name" placeholder="Full Name" ng-model="data.name" required>
             </ion-input>
 
@@ -54,7 +51,7 @@
                 </div>
             </div>
 
-            <ion-input class="item-input padding">
+            <ion-input class="item-input padding" style="margin-bottom:0;">
                 <input type="submit" class="button button-positive" value="Add" 
                        ng-disabled="addForm.$invalid && addForm.$submitted">
             </ion-input>

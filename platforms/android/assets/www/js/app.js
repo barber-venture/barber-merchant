@@ -1,4 +1,4 @@
-var apiUrl = 'http://fablysh.esy.es/api/';
+var apiUrl = 'http://localhost/barber-web/api/';
 var userInfo = {};
 angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.NativeDrawer'])
 
@@ -239,22 +239,22 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
             $scope.myGoBack = function () {
                 $ionicHistory.goBack();
                 /*var options = {
-                    "direction": "right", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
-                    "duration": 500, // in milliseconds (ms), default 400
-                    "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
-                    "androiddelay": -1, // same as above but for Android, default 70
-                    "winphonedelay": 150 // same as above but for Windows Phone, default 200
-                };
-                window.plugins.nativepagetransitions.slide(
-                        options,
-                        function (msg) {
-                            console.log("success: " + msg);
-                            window.plugins.nativepagetransitions.executePendingTransition();
-                        }, // called when the animation has finished
-                        function (msg) {
-                            alert("error: " + msg)
-                        } // called in case you pass in weird values
-                );*/
+                 "direction": "right", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
+                 "duration": 500, // in milliseconds (ms), default 400
+                 "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
+                 "androiddelay": -1, // same as above but for Android, default 70
+                 "winphonedelay": 150 // same as above but for Windows Phone, default 200
+                 };
+                 window.plugins.nativepagetransitions.slide(
+                 options,
+                 function (msg) {
+                 console.log("success: " + msg);
+                 window.plugins.nativepagetransitions.executePendingTransition();
+                 }, // called when the animation has finished
+                 function (msg) {
+                 alert("error: " + msg)
+                 } // called in case you pass in weird values
+                 );*/
             };
 
             $scope.goToPage = function (pageId, params) {
@@ -267,23 +267,23 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 }
                 $scope.closeDrawer();
                 /*var options = {
-                    "direction": "left", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
-                    "duration": 500, // in milliseconds (ms), default 400
-                    "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
-                    "androiddelay": -1, // same as above but for Android, default 70
-                    "winphonedelay": 150, // same as above but for Windows Phone, default 200
-                    //"href": "#/" + page
-                };
-                window.plugins.nativepagetransitions.slide(
-                        options,
-                        function (msg) {
-                            console.log("success: " + msg);
-                            window.plugins.nativepagetransitions.executePendingTransition();
-                        }, // called when the animation has finished
-                        function (msg) {
-                            alert("error: " + msg)
-                        } // called in case you pass in weird values
-                );*/
+                 "direction": "left", // 'left|right|up|down', default 'right' (Android currently only supports left and right)
+                 "duration": 500, // in milliseconds (ms), default 400
+                 "iosdelay": -1, // ms to wait for the iOS webview to update before animation kicks in, default 60
+                 "androiddelay": -1, // same as above but for Android, default 70
+                 "winphonedelay": 150, // same as above but for Windows Phone, default 200
+                 //"href": "#/" + page
+                 };
+                 window.plugins.nativepagetransitions.slide(
+                 options,
+                 function (msg) {
+                 console.log("success: " + msg);
+                 window.plugins.nativepagetransitions.executePendingTransition();
+                 }, // called when the animation has finished
+                 function (msg) {
+                 alert("error: " + msg)
+                 } // called in case you pass in weird values
+                 );*/
             };
 
             $scope.openMenu = function () {
@@ -353,21 +353,20 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
-                        	alert("here")
                             userInfo = data.data.User;
                             if (userInfo.role_id == 2) {
                                 $("#merchant").show();
                                 $("#barber").hide();
                                 $("#userName").text(data.data.Merchant.name);
                                 $("#userAddress").text(data.data.Merchant.address);
-                                $("#userImage").attr("src",data.data.MerchantImage.image);
+                                $("#userImage").attr("src", data.data.MerchantImage.image);
                                 $("#userAddress").show();
                             } else if (userInfo.role_id == 4) {
                                 $("#merchant").hide();
                                 $("#barber").show();
                                 $("#userName").text(data.data.Barber.name);
                                 $("#userAddress").hide();
-                                $("#userImage").attr("src","img/profile.jpg");
+                                $("#userImage").attr("src", "img/profile.jpg");
                             }
                             setInterval(function () {
                                 getNotifications();
@@ -1635,9 +1634,9 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 }
                 return result;
             };
-            
-            $scope.updateIncrement = function(i){
-                $scope.start = parseInt(i)+1;
+
+            $scope.updateIncrement = function (i) {
+                $scope.start = parseInt(i) + 1;
             }
             showLoader($ionicLoading);
             var responsePromise = $http({
@@ -1790,25 +1789,74 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
         })
 
         .controller('AccountsController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {
-            showLoader($ionicLoading);
-            var responsePromise = $http({
-                method: 'POST',
-                url: apiUrl + "getBarberAccounts",
-                data: $.param({user_id: userInfo.id}),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
+            $scope.initialize = function () {
+                showLoader($ionicLoading);
+                var responsePromise = $http({
+                    method: 'POST',
+                    url: apiUrl + "getBarberAccounts",
+                    data: $.param({user_id: userInfo.id}),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
 
-            responsePromise.success(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-                if (data.status) {
-                    $scope.users = data.data;
-                }
-            });
-            responsePromise.error(function (data, status, headers, config) {
-                hideLoader($ionicLoading);
-            });
+                responsePromise.success(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                    if (data.status) {
+                        $scope.users = data.data;
+                    }
+                });
+                responsePromise.error(function (data, status, headers, config) {
+                    hideLoader($ionicLoading);
+                });
+            }
+            $scope.initialize();
+
+            $scope.deleteBarber = function (id) {
+                navigator.notification.confirm(
+                        'Are you sure?', // message
+                        function (button) {
+                            if (button == 1) {
+                                showLoader($ionicLoading);
+                                var responsePromise = $http({
+                                    method: 'POST',
+                                    url: apiUrl + "deleteBarber",
+                                    data: $.param({id: id}),
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }
+                                });
+
+                                responsePromise.success(function (data, status, headers, config) {
+                                    hideLoader($ionicLoading);
+                                    if (data.status) {
+                                        $scope.initialize();
+                                    }
+                                });
+                                responsePromise.error(function (data, status, headers, config) {
+                                    hideLoader($ionicLoading);
+                                    var myPopup = $ionicPopup.show({
+                                        title: 'Error',
+                                        scope: $scope,
+                                        template: "Invalid Request",
+                                        buttons: [
+                                            {
+                                                text: 'Cancel'
+                                            },
+                                            {
+                                                text: '<b>OK</b>',
+                                                type: 'button-assertive'
+                                            }
+                                        ]
+                                    });
+                                });
+                            }
+                        }, // callback to invoke with index of button pressed
+                        'Yes', // title
+                        'No'          // buttonLabels
+                        );
+            }
+
         })
 
         .controller('SetAvailabilityController', function ($scope, $state, $ionicLoading, $http, $ionicPopup) {

@@ -5,23 +5,24 @@
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="padding bg-body">
         <div class="list margin-top-5 box-set-upper" ng-repeat="review in reviews">
-            <ion-item class="item-thumbnail-left box-set" ng-click="goToPage('other-profile',review.UserDetail.user_id)">
-                <img class="pro-img" ng-if="review.UserDetail.profile_picture == ''" src="img/profile.jpg" />
-                <img class="pro-img" ng-if="review.UserDetail.profile_picture != ''" src="{{review.UserDetail.profile_picture}}" />
-                <div class="row">
-                    <div class="col-50 left-align">{{review.UserDetail.name}}</div></div>
+            <ion-item class="item-thumbnail-left box-set">
+                <img ng-click="goToPage('other-profile',review.UserDetail.user_id)" class="pro-img" ng-if="review.UserDetail.profile_picture == ''" src="img/profile.jpg" />
+                <img ng-click="goToPage('other-profile',review.UserDetail.user_id)" class="pro-img" ng-if="review.UserDetail.profile_picture != ''" src="{{review.UserDetail.profile_picture}}" />
+                <div class="row" ng-click="goToPage('other-profile',review.UserDetail.user_id)">
+                    <div class="col-50 left-align">{{review.UserDetail.name}}</div>
+                </div>
                  <div class="row">
                     <div class="col-50 size-10 gen">{{review.UserDetail.gender}}</div>
                      
                 </div>
                <div class="row followr">
                    <div class=" col-50 left-align gen"><span>Rated</span> {{review.Review.rating}}</div>
-                    <div class=" col-50 gen"><span>Follwers</span> {{review.UserDetail.current_followers}}</div>
+                    <div class=" col-50 right-align gen"><span>Follwers</span> {{review.UserDetail.current_followers}}</div>
                 </div>
                
                 <div class="row center-align ti-cal-set" style="padding:2px 5px !important;">
-                    <div class="col-50 icon ion-calendar"> {{review.Review.created_date}}</div>
-                    <div class="col-50 icon ion-clock"> {{review.Review.created_time}}</div>
+                    <div class="col-50 icon ion-calendar"> <span class="fix-ratio-marg">{{review.Review.created_date}}</span></div>
+                    <div class="col-50 icon ion-clock"> <span class="fix-ratio-marg">{{review.Review.created_time}}</span></div>
                 </div>
                 
                  <div class="row center-align full-text msg-set">

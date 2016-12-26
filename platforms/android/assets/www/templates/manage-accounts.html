@@ -1,12 +1,12 @@
 <ion-view view-title="Home" name="home-view" class="homeBG" cache-view="false">
-    <ion-header-bar class="bar-positive">
+    <ion-header-bar class="bar-positive trans-header1">
         <button ng-click="openDrawer()" class = "button button-icon icon ion-navicon show"></button>
-        <h1 class="title">All Accounts</h1>
+        <h1 class="title align-center">All Accounts</h1>
         <button class = "button button-icon icon ion-person-add show" ng-click="goToPage('add-barber')"></button>
     </ion-header-bar>
-    <ion-content overflow-scroll="true" class="padding">
+    <ion-content overflow-scroll="true" class="padding mang-acc">
         <ion-list>
-            <ion-item item="volunteer" class="item item-icon-right" ng-repeat="user in users">
+            <ion-item item="volunteer" class="item item-icon-right" ng-repeat="user in users" ng-click="deleteBarber(user.Barber.id)">
                 <i class="icon ion-trash-b icon-accessory"></i> 
                 {{user.Barber.name}}
             </ion-item>

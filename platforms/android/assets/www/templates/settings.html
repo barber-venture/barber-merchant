@@ -5,19 +5,19 @@
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="padding">
         <ion-list class="setting-main">
-            <ion-item item="volunteer" ng-click="goToPage('change-password')" class="item item-icon-right">
+            <ion-item item="volunteer" ng-click="goToPage('change-password')" class="item item-icon-right chang-pass">
                 <i class="icon ion-chevron-right icon-accessory"></i> 
                 Change Password
             </ion-item>
-            <ion-item item="volunteer" ng-repeat="pages in staticPages" ng-click="goToStaticPage(pages.Page.id)" class="item item-icon-right">
+            <ion-item item="volunteer" ng-repeat="pages in staticPages" ng-click="goToStaticPage(pages.Page.id)" class="item item-icon-right about-set">
                 <i class="icon ion-chevron-right icon-accessory"></i> 
                 {{pages.Page.title}}
             </ion-item>
-            <ion-item item="volunteer" ng-click="goToPage('feedback')" class="item item-icon-right">
+            <ion-item item="volunteer" ng-click="goToPage('feedback')" class="item item-icon-right feed-back">
                 <i class="icon ion-chevron-right icon-accessory"></i> 
                 Send Feedback
             </ion-item>
-            <ion-item item="volunteer" ng-click="goToPage('logout')" class="item item-icon-right">
+            <ion-item item="volunteer" ng-click="goToPage('logout')" class="item item-icon-right log-out">
                 <i class="icon ion-chevron-right icon-accessory"></i> 
                 Logout
             </ion-item>

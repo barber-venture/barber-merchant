@@ -559,13 +559,13 @@ img {
 
 .profile-detail {
     float: left;
-    width: 76%;
+    width: 73%;
     margin-top: 15px;
 }
 
 .profile-rating {
     float: right;
-    width: 24%;
+    width: 100px;
     margin-top: 5px;
 }
 
@@ -800,6 +800,7 @@ body {
 .trans-header1 {
     background-color: #191818 !important;
     border-color: #191818 !important;
+       background-image: inherit !important;
 }
 
 .for-input .item-stacked-label {
@@ -811,6 +812,14 @@ body {
     padding-left: 0 !important;
     font-family: 'Aileron Thin';
 }
+
+
+.mang-acc .list .item {
+    background:#f36f21;
+}
+
+
+
 
 
 /*-- edit profile --*/
@@ -916,8 +925,20 @@ margin: 0 !important; padding: 0 !important;
 }
 
 .acc-btn {
-    background: #f36f21;
+    background: #f36f21; height: 28px;
 }
+
+.add-full{
+    white-space: initial !important;
+}
+
+.pad-0{ padding: 0 !important;}
+
+.type-fix{    color: #f36f21;
+    font-size: 12px;
+    float: left;
+    width: auto;}
+
 
 .btn-equ:hover {
     color: #fff;
@@ -944,7 +965,7 @@ margin: 0 !important; padding: 0 !important;
 .badge {
     padding: 3px 7px !important;
     vertical-align: super!important;
-    font-size: 13px!important;
+    font-size: 12px!important;
 }
 
 
@@ -965,6 +986,30 @@ margin: 0 !important; padding: 0 !important;
   background-size: 22px auto !important;
   padding-left: 35px;
 }
+
+
+.setting-main .list .item{ background: url(../img/menu-icon.png) no-repeat left #f36f21;}
+
+
+.chang-pass.item{ background-position: 6px -575px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;}
+
+.about-set.item{ background-position: 6px -647px !important;    
+  background-size: 22px auto !important;
+  padding-left: 35px;}
+
+
+.feed-back.item{ background-position: 6px -716px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;}
+
+
+.log-out.item{ background-position: 6px -780px !important;
+  background-size: 22px auto !important;
+  padding-left: 35px;}
+
+
 
 
 .review.item {
@@ -1042,7 +1087,7 @@ text-transform: capitalize;}
 
 /*-- Other profile --*/
 
-.bg-top-pro{ background: url(../img/bg-profile.png) no-repeat top center; background-size: 100%;padding: 75px 30px 65px 30px;}
+.bg-top-pro{ background: url(../img/bg-profile.png) no-repeat top center; background-size: 100% 100%;padding: 75px 30px 65px 30px;}
 
 
 .li-tb {
@@ -1070,15 +1115,33 @@ text-transform: capitalize;}
 .gen span{ color: #444; font-size: 12px; font-weight: normal;}
 
 .gen{ font-weight: 600;  font-size: 13px;}
+span.fix-ratio-marg {
+    margin-left: 3px;
+}
 
 
 /*-- Other profile --*/
 
 
 .box-set-upper {
-  box-shadow: 0 0 5px rgba(190, 190, 190, 0.3);
+  box-shadow: 0 0 5px rgba(190, 190, 190, 0.5);
 
 }
+
+.mang-acc .item {
+    background: #f36f21 none repeat scroll 0 0;
+    border-color: #f97e35;
+    border-style: solid;
+    border-width: 1px;
+    color: #fff;
+    font-family: "Aileron";
+}
+
+.item-icon-left .icon-accessory, .item-icon-right .icon-accessory{color: #fff !important;}
+
+.badge.badge-assertive{ background: #f36f21 !important; font-family: 'Aileron Thin' !important;}
+
+.ques{background: #f36f21 !important; color: #fff;font-family: "Aileron";}
 
 @media screen and (max-width:480px) {
     .profile-detail {
@@ -1093,6 +1156,15 @@ text-transform: capitalize;}
     .profile-rating p {
         font-size: 12px;
     }
+    
+    .profile-detail {
+    width: 66%;
+   
+}
+    .profile-detail h2{ font-size: 16px;}
+    
+    
+    
 }
 
 input {
