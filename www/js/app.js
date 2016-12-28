@@ -12,27 +12,21 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 templateUrl: 'templates/home.html',
                 controller: 'HomeController'
             });
-
             $stateProvider.state('login', {
                 url: '/login',
                 templateUrl: 'templates/login.html',
                 controller: 'LoginController'
             });
-
             $stateProvider.state('forget', {
                 url: '/forget',
                 templateUrl: 'templates/forget.html',
                 controller: 'ForgetController'
             });
-
             $stateProvider.state('signup', {
                 url: '/signup',
                 templateUrl: 'templates/signup.html',
                 controller: 'SignUpController'
             });
-
-
-
             // setup an abstract state for the tabs directive
             $stateProvider.state('dashboard', {
                 url: "/dashboard",
@@ -40,8 +34,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 templateUrl: "templates/dashboard.html",
                 controller: 'DashboardController'
             });
-
-
             $stateProvider.state('dashboard.bookings', {
                 url: '/bookings',
                 views: {
@@ -86,98 +78,76 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 url: '/logout',
                 controller: 'LogoutController'
             });
-
             $stateProvider.state('my-profile', {
                 url: '/my-profile',
                 templateUrl: 'templates/my-profile.html',
                 controller: 'MyProfileController'
             });
-
             $stateProvider.state('edit-profile', {
                 url: '/edit-profile',
                 templateUrl: 'templates/edit-profile.html',
                 controller: 'EditProfileController'
             });
-
-
-
-
             $stateProvider.state('settings', {
                 url: '/settings',
                 templateUrl: 'templates/settings.html',
                 controller: 'SettingsController'
             });
-
             $stateProvider.state('change-password', {
                 url: '/change-password',
                 templateUrl: 'templates/change-password.html',
                 controller: 'ChangePasswordController'
             });
-
             $stateProvider.state('feedback', {
                 url: '/feedback',
                 templateUrl: 'templates/feedback.html',
                 controller: 'FeedbackController'
             });
-
             $stateProvider.state('static-pages', {
                 url: '/static-pages/:id',
                 templateUrl: 'templates/static-pages.html',
                 controller: 'StaticPagesController'
             });
-
-
-
             $stateProvider.state('reviews', {
                 url: '/reviews',
                 templateUrl: 'templates/reviews.html',
                 controller: 'ReviewsController'
             });
-
             $stateProvider.state('add-reply', {
                 url: '/add-reply/:id',
                 templateUrl: 'templates/add-reply.html',
                 controller: 'AddReplyController'
             });
-
-
-
             $stateProvider.state('other-profile', {
                 url: '/other-profile/:id',
                 templateUrl: 'templates/other-profile.html',
                 controller: 'OtherProfileController'
             });
-
             $stateProvider.state('set-availability', {
                 url: '/set-availability',
                 templateUrl: 'templates/set-availability.html',
                 controller: 'SetAvailabilityController'
             });
-
             $stateProvider.state('manage-accounts', {
                 url: '/accounts',
                 templateUrl: 'templates/manage-accounts.html',
                 controller: 'AccountsController'
             });
-
             $stateProvider.state('add-barber', {
                 url: '/add-barber',
                 templateUrl: 'templates/add-barber.html',
                 controller: 'AddBarberController'
             });
-
             $stateProvider.state('bank-details', {
                 url: '/bank-details',
                 templateUrl: 'templates/bank-details.html',
                 controller: 'BankDetailsController'
             });
-
             $stateProvider.state('notifications', {
                 url: '/notifications',
                 templateUrl: 'templates/notifications.html',
                 controller: 'NotificationsController'
             });
-
             $urlRouterProvider.otherwise('/')
         })
 
@@ -215,7 +185,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     };
                     scope.gPlace = new google.maps.places.Autocomplete(element[0],
                             options);
-
                     google.maps.event.addListener(scope.gPlace, 'place_changed',
                             function () {
                                 var place = scope.gPlace.getPlace();
@@ -235,7 +204,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
             $scope.toggleLeft = function () {
                 $ionicSideMenuDelegate.toggleLeft();
             };
-
             $scope.myGoBack = function () {
                 $ionicHistory.goBack();
                 /*var options = {
@@ -256,7 +224,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                  } // called in case you pass in weird values
                  );*/
             };
-
             $scope.goToPage = function (pageId, params) {
                 if (params == undefined) {
                     $state.go(pageId);
@@ -285,7 +252,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                  } // called in case you pass in weird values
                  );*/
             };
-
             $scope.openMenu = function () {
                 var options = {
                     "origin": "left", // 'left|right', open the drawer from this side of the view, default 'left'
@@ -306,24 +272,35 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
 
 
             $scope.showCamera = function (destId) {
-                var confirmPopup = $ionicPopup.confirm({
+                var confirmPopup = $ionicPopup.show({
                     title: 'Choose Method',
                     template: 'Please select method to choose profile picture.',
-                    cancelText: 'Gallery',
-                    okText: 'Camera'
+                    buttons: [
+                        {
+                            text: '',
+                            type: 'button icon ion-briefcase button-positive',
+                            onTap: function () {
+                                openGallery(destId);
+                            }
+                        },
+                        {
+                            text: '',
+                            type: 'button icon ion-camera button-positive',
+                            onTap: function () {
+                                openCamera(destId);
+                            }
+                        },
+                        {
+                            text: '',
+                            type: 'button icon ion-trash-a button-assertive',
+                            onTap: function () {
+                                $("#" + destId).attr("src", "img/file-add.png");
+                            }
+                        }
+                    ]
                 });
 
-                confirmPopup.then(function (res) {
-                    if (res) {
-                        openCamera(destId);
-                    } else {
-                        openGallery(destId);
-                    }
-                });
             };
-
-
-
         })
 
         .controller('HomeController', function ($scope, $state) {
@@ -349,7 +326,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -456,7 +432,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -517,7 +492,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -630,7 +604,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -658,7 +631,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                                 }
                             ]
                         });
-
                     } else {
                         var myPopup = $ionicPopup.show({
                             title: 'Error',
@@ -711,7 +683,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -753,18 +724,15 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 });
             }
             $scope.getBookings();
-
             $scope.$on('processBookings', function (e) {
                 $scope.getBookings();
             });
-
         })
 
         .controller('AddController', function ($scope, $state) {
             $scope.submitForm = function (addForm) {
                 if (addForm.$valid) {
                     var newEmail = $scope.data.email;
-
                 }
             }
         })
@@ -781,7 +749,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -846,7 +813,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -933,7 +899,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             method: 'GET',
                             url: "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=true",
                         });
-
                         responsePromise.success(function (data, status, headers, config) {
                             hideLoader($ionicLoading);
                             var address = data.results[0].formatted_address;
@@ -1013,7 +978,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     cancelText: 'No',
                     okText: 'Yes'
                 });
-
                 confirmPopup.then(function (res) {
                     if (res) {
                         $("#" + id).remove();
@@ -1064,7 +1028,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
                         });
-
                         responsePromise.success(function (data, status, headers, config) {
                             hideLoader($ionicLoading);
                             if (data.status) {
@@ -1122,7 +1085,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -1164,7 +1126,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 });
             }
             $scope.getAccepted();
-
             $scope.$on('processAccepted', function (e) {
                 $scope.getAccepted();
             });
@@ -1184,7 +1145,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -1226,17 +1186,14 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 });
             }
             $scope.getOngoing();
-
             $scope.$on('processOngoing', function (e) {
                 $scope.getOngoing();
             });
-
             $ionicModal.fromTemplateUrl('templates/payment.html', {
                 scope: $scope,
                 animation: 'slide-in-up'
             }).then(function (modal) {
                 $scope.payment = modal;
-
             });
             $scope.openPayment = function (merchantId, appointmentId) {
                 $scope.payment.show();
@@ -1246,7 +1203,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
             $scope.closePayment = function () {
                 $scope.payment.hide();
             };
-
             $scope.submitForm = function (changeForm) {
                 if (changeForm.$valid) {
                     showLoader($ionicLoading);
@@ -1258,7 +1214,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -1316,7 +1271,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -1357,7 +1311,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 });
             }
             $scope.getCompleted();
-
             $scope.$on('processCompleted', function (e) {
                 $scope.getCompleted();
             });
@@ -1396,7 +1349,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
                         });
-
                         responsePromise.success(function (data, status, headers, config) {
                             hideLoader($ionicLoading);
                             if (data.status) {
@@ -1464,7 +1416,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -1517,7 +1468,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -1570,7 +1520,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -1634,7 +1583,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 }
                 return result;
             };
-
             $scope.updateIncrement = function (i) {
                 $scope.start = parseInt(i) + 1;
             }
@@ -1647,7 +1595,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -1701,7 +1648,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -1770,7 +1716,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -1780,7 +1725,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
             responsePromise.error(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
             });
-
             $scope.goToStaticPage = function (id) {
                 $state.go('static-pages', {
                     'id': id
@@ -1799,7 +1743,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 });
-
                 responsePromise.success(function (data, status, headers, config) {
                     hideLoader($ionicLoading);
                     if (data.status) {
@@ -1811,7 +1754,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 });
             }
             $scope.initialize();
-
             $scope.deleteBarber = function (id) {
                 navigator.notification.confirm(
                         'Are you sure?', // message
@@ -1826,7 +1768,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                                         'Content-Type': 'application/x-www-form-urlencoded'
                                     }
                                 });
-
                                 responsePromise.success(function (data, status, headers, config) {
                                     hideLoader($ionicLoading);
                                     if (data.status) {
@@ -1874,7 +1815,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -1934,7 +1874,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -1999,7 +1938,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -2051,7 +1989,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                 account_holder_name: '',
                 account_number: ''
             };
-
             showLoader($ionicLoading);
             var responsePromise = $http({
                 method: 'POST',
@@ -2063,7 +2000,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {
@@ -2106,7 +2042,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     ]
                 });
             });
-
             $scope.submitForm = function (signupForm) {
                 if (signupForm.$valid) {
                     showLoader($ionicLoading);
@@ -2125,7 +2060,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     });
-
                     responsePromise.success(function (data, status, headers, config) {
                         hideLoader($ionicLoading);
                         if (data.status) {
@@ -2199,7 +2133,6 @@ angular.module('barber', ['ionic', 'ui.router', 'ngMessages', 'ionic.contrib.Nat
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
-
             responsePromise.success(function (data, status, headers, config) {
                 hideLoader($ionicLoading);
                 if (data.status) {

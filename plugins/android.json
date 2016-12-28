@@ -33,10 +33,16 @@
         },
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.fablysh.merchant"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.fablysh.merchant"
         }
     }
